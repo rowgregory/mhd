@@ -5,6 +5,8 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
+import MhdLogo from "@/app/components/MHDLogo";
+import { SQYSH_URL } from "@/app/lib/constants/common.constants";
 
 export default function LoginClient() {
   const reduce = useReducedMotion();
@@ -35,13 +37,9 @@ export default function LoginClient() {
           <Link
             href="/"
             aria-label="MHD Custom home"
-            className="inline-flex focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-accent"
+            className="inline-flex text-fg transition-colors hover:text-accent focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-accent"
           >
-            <span className="flex h-14 w-14 items-center justify-center border-2 border-accent">
-              <span className="font-display text-3xl leading-none text-accent">
-                M
-              </span>
-            </span>
+            <MhdLogo className="h-12 w-auto sm:h-14" aria-hidden="true" />
           </Link>
           <h1 className="mt-6 font-display text-[clamp(1.75rem,7vw,2.25rem)] uppercase tracking-[0.06em] text-fg">
             Admin sign in
@@ -59,7 +57,7 @@ export default function LoginClient() {
             aria-busy={loading}
             className="inline-flex w-full items-center justify-center gap-3 border border-line/20 bg-surface px-5 py-3.5 font-sans text-sm font-medium text-fg transition-colors hover:bg-surface-alt focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60"
           >
-            <GoogleG aria-hidden="true" />
+            <Google aria-hidden="true" />
             {loading ? "Signing in…" : "Continue with Google"}
           </button>
 
@@ -73,12 +71,23 @@ export default function LoginClient() {
             </p>
           )}
         </div>
+        {/* Quiet build credit */}
+        <p className="absolute bottom-4 -translate-x-1/2 left-1/2 text-center font-sans text-xs text-fg-subtle">
+          <a
+            href={SQYSH_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-fg-muted transition-colors hover:text-accent focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            Sqysh
+          </a>
+        </p>
       </motion.div>
     </main>
   );
 }
 
-function GoogleG({ className }: { className?: string }) {
+function Google({ className }: { className?: string }) {
   return (
     <svg
       className={className}

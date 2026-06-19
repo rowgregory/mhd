@@ -8,6 +8,7 @@ export const NAV = [
   { label: "Contact", href: "/contact" },
 ];
 
+export const SITE_URL = "https://www.mhdcustomllc.com"; // ← set to the real production domain
 export const PHONE = "1 781 248 2736";
 export const PHONE_HREF = "tel:+17815550142";
 export const EMAIL = "jrogers@mhdcustomllc.com";

@@ -3,8 +3,10 @@ import { Bebas_Neue, Geist_Mono, Roboto } from "next/font/google";
 import "./globals.css";
 import NavDrawer from "./components/NavDrawer";
 import JsonLd from "./Jsonld";
-import Footer from "./components/Footer";
 import StickyHeader from "./components/StickyHeader";
+import ConditionalFooter from "./components/ConditionalFooter";
+import { SITE_URL } from "./lib/constants/common.constants";
+import BuildCredit from "./components/BuildCredit";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -30,8 +32,6 @@ export const roboto = Roboto({
 // valid hreflang/lang, crawlable links, and a viewport that allows zoom.
 // metadataBase makes all relative OG/canonical URLs absolute (required for
 // valid Open Graph + canonical resolution).
-
-const SITE_URL = "https://www.mhdcustom.com"; // ← set to the real production domain
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -142,7 +142,11 @@ export default function RootLayout({
     >
       <body>
         <JsonLd />
-        {children} <Footer /> <NavDrawer /> <StickyHeader />
+        <BuildCredit />
+        {children}
+        <ConditionalFooter />
+        <NavDrawer />
+        <StickyHeader />
       </body>
     </html>
   );
