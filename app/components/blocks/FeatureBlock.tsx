@@ -7,7 +7,7 @@ import { ITEMS } from "@/app/lib/constants/home.constants";
 import ArrowButton from "../ui/ArrowButton";
 
 export default function Feature() {
-  const { container, fromLeft, fromRight } = useMotionPresets();
+  const { container, fromLeft, rise } = useMotionPresets();
 
   return (
     <section
@@ -57,7 +57,7 @@ export default function Feature() {
           className="lg:pt-6"
         >
           <motion.p
-            variants={fromRight}
+            variants={rise}
             className="text-[clamp(11px,2vw,13px)] uppercase tracking-[0.28em] text-fg-subtle"
           >
             What we do
@@ -65,14 +65,14 @@ export default function Feature() {
 
           <motion.h2
             id="feature-heading"
-            variants={fromRight}
+            variants={rise}
             className="mt-4 font-display text-[clamp(2rem,6vw,3.5rem)] uppercase leading-[0.95] tracking-[0.01em] text-fg"
           >
             Craftsmanship in every joint
           </motion.h2>
 
           <motion.p
-            variants={fromRight}
+            variants={rise}
             className="mt-6 max-w-prose font-sans text-base leading-relaxed text-fg-muted"
           >
             From the first measurement to the final reveal, every cabinet is
@@ -84,7 +84,7 @@ export default function Feature() {
             {ITEMS.map(({ n, label }) => (
               <motion.li
                 key={n}
-                variants={fromRight}
+                variants={rise}
                 className="flex items-baseline gap-5 border-b border-line/15 py-5"
               >
                 <span
@@ -100,7 +100,7 @@ export default function Feature() {
             ))}
           </motion.ol>
 
-          <motion.div variants={fromRight} className="mt-10">
+          <motion.div variants={rise} className="mt-10">
             <ArrowButton href="/services" variant="camel">
               Our services
             </ArrowButton>

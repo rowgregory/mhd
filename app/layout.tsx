@@ -4,6 +4,7 @@ import "./globals.css";
 import NavDrawer from "./components/NavDrawer";
 import JsonLd from "./Jsonld";
 import Footer from "./components/Footer";
+import StickyHeader from "./components/StickyHeader";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -141,7 +142,7 @@ export default function RootLayout({
     >
       <body>
         <JsonLd />
-        {children} <Footer /> <NavDrawer />
+        {children} <Footer /> <NavDrawer /> <StickyHeader />
       </body>
     </html>
   );

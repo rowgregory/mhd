@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { NAV, PHONE, PHONE_HREF } from "../lib/constants/common.constants";
 import { useNavDrawer } from "../lib/stores/useNavDrawer";
-import { useReducedMotion, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import MhdLogo from "./MHDLogo";
 import ArrowButton from "./ui/ArrowButton";
 import { useMotionPresets } from "../lib/hooks/useMotionPresets";
@@ -11,8 +11,8 @@ import { useMotionPresets } from "../lib/hooks/useMotionPresets";
 export default function Header() {
   const open = useNavDrawer((s) => s.open);
   const toggleDrawer = useNavDrawer((s) => s.toggleDrawer);
-  const { headerContainer, item, barSpring } = useMotionPresets();
-  const reduce = useReducedMotion();
+  const { item, barSpring, reduce, makeContainer } = useMotionPresets();
+  const headerContainer = makeContainer(0.08, 0.1);
 
   return (
     // Not fixed — sits in normal flow above the hero and scrolls away with it.
