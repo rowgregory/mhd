@@ -4,52 +4,7 @@ import { useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Picture from "../ui/Picture";
-
-type Project = {
-  img: string;
-  alt: string;
-  title: string;
-  meta: string;
-};
-
-const PROJECTS: Project[] = [
-  {
-    img: "/images/work-1.jpg",
-    alt: "Walnut kitchen with waterfall island",
-    title: "Marblehead Kitchen",
-    meta: "Walnut · 2025",
-  },
-  {
-    img: "/images/work-2.jpg",
-    alt: "Floor-to-ceiling white oak built-ins",
-    title: "Swampscott Library",
-    meta: "White oak · 2025",
-  },
-  {
-    img: "/images/work-3.jpg",
-    alt: "Curved reception desk in maple",
-    title: "Lynn Reception Desk",
-    meta: "Maple · 2024",
-  },
-  {
-    img: "/images/work-4.jpg",
-    alt: "Custom mudroom lockers and bench",
-    title: "Nahant Mudroom",
-    meta: "Painted poplar · 2024",
-  },
-  {
-    img: "/images/work-5.jpg",
-    alt: "Floating vanity with integrated lighting",
-    title: "Salem Vanity",
-    meta: "Rift oak · 2024",
-  },
-  {
-    img: "/images/work-6.jpg",
-    alt: "Built-in home office with fluted cabinet doors",
-    title: "Beverly Home Office",
-    meta: "Cherry · 2024",
-  },
-];
+import { PROJECTS } from "@/app/lib/constants/home.constants";
 
 export default function Work() {
   const reduce = useReducedMotion();

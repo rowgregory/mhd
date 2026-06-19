@@ -1,62 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Picture from "../ui/Picture";
-
-type Collection = {
-  img: string;
-  alt: string;
-  name: string;
-  style: string;
-  href: string;
-};
-
-const COLLECTIONS: Collection[] = [
-  {
-    img: "/images/collection-1.jpg",
-    alt: "Shaker-style kitchen cabinetry in painted maple",
-    name: "The Marblehead",
-    style: "Shaker · painted maple",
-    href: "/contact?collection=marblehead",
-  },
-  {
-    img: "/images/collection-2.jpg",
-    alt: "Flat-panel walnut cabinetry with integrated pulls",
-    name: "The Atlantic",
-    style: "Flat panel · walnut",
-    href: "/contact?collection=atlantic",
-  },
-  {
-    img: "/images/collection-3.jpg",
-    alt: "Beaded inset white oak cabinetry, traditional detailing",
-    name: "The Heritage",
-    style: "Beaded inset · white oak",
-    href: "/contact?collection=heritage",
-  },
-];
+import { useMotionPresets } from "@/app/lib/hooks/useMotionPresets";
+import { COLLECTIONS } from "@/app/lib/constants/home.constants";
+import ArrowButton from "../ui/ArrowButton";
 
 export default function Collections() {
-  const reduce = useReducedMotion();
-
-  const container: Variants = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: reduce ? 0 : 0.12,
-        delayChildren: reduce ? 0 : 0.05,
-      },
-    },
-  };
-  const rise: Variants = {
-    hidden: { opacity: 0, y: reduce ? 0 : 24 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: reduce ? 0.01 : 0.6, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
+  const { container, rise } = useMotionPresets();
 
   return (
     <section
@@ -151,21 +104,13 @@ export default function Collections() {
           variants={rise}
           className="mt-12 text-center sm:mt-16"
         >
-          <p className="font-sans text-base text-fg-muted">
+          <p className="font-sans text-base text-fg-muted mb-4">
             Have something entirely your own in mind?
           </p>
-          <Link
-            href="/contact"
-            className="group mt-5 inline-flex items-center gap-3 bg-taupe-raw px-8 py-3.5 font-display text-lg uppercase tracking-[0.06em] text-bone transition-colors hover:bg-bone hover:text-espresso-raw focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-accent"
-          >
+
+          <ArrowButton href="/contact" variant="camel">
             Start a custom project
-            <ArrowUpRight
-              size={18}
-              strokeWidth={1.5}
-              aria-hidden="true"
-              className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            />
-          </Link>
+          </ArrowButton>
         </motion.div>
       </div>
     </section>

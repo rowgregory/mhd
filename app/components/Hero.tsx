@@ -1,6 +1,5 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import Picture from "./ui/Picture";
+import ArrowButton from "./ui/ArrowButton";
 
 export default function Hero() {
   return (
@@ -50,14 +49,15 @@ export default function Hero() {
           Custom cabinetry &amp; fine woodwork
         </p>
 
-        <Link
-          href="/contact"
+        <ArrowButton
+          href="/projects"
+          variant="camel"
+          ariaLabel="View our work"
+          className="hero-rise-item mt-8"
           style={{ animationDelay: "0.85s" }}
-          className="hero-rise-item mt-8 inline-flex items-center gap-3 bg-camel-light px-6 py-3.5 uppercase text-lg text-bone transition-colors hover:bg-camel focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-bone sm:px-8"
         >
-          Request a quote
-          <ArrowRight size={16} strokeWidth={1.5} aria-hidden="true" />
-        </Link>
+          View our work
+        </ArrowButton>
       </div>
 
       {/* Scroll cue (decorative) */}

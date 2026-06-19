@@ -1,3 +1,5 @@
+import { FacebookIcon } from "@/app/components/ui/FacebookIcon";
+
 export const NAV = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
@@ -9,3 +11,18 @@ export const NAV = [
 export const PHONE = "1 781 248 2736";
 export const PHONE_HREF = "tel:+17815550142";
 export const EMAIL = "jrogers@mhdcustomllc.com";
+export const SQYSH_URL = "https://sqysh.io";
+
+export const HOURS = [
+  "Mon–Fri: 8 AM – 5 PM",
+  "Saturday: by appointment",
+  "Sunday: closed",
+];
+
+export const SOCIALS = [
+  {
+    label: "Facebook",
+    href: "https://facebook.com/mhdcustom",
+    Icon: FacebookIcon(),
+  },
+];

@@ -1,62 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Picture from "../ui/Picture";
-
-type Offering = {
-  img: string;
-  alt: string;
-  title: string;
-  blurb: string;
-  href: string;
-};
-
-const OFFERINGS: Offering[] = [
-  {
-    img: "/images/work-1.jpg",
-    alt: "Custom hardwood kitchen cabinetry installed in a bright home",
-    title: "Kitchens & Cabinetry",
-    blurb: "Full custom kitchens, islands, and storage built to your space.",
-    href: "/services/kitchens",
-  },
-  {
-    img: "/images/work-2.jpg",
-    alt: "A craftsman fitting a built-in shelving unit",
-    title: "Built-Ins & Millwork",
-    blurb: "Shelving, wall units, and trim that look original to the room.",
-    href: "/services/built-ins",
-  },
-  {
-    img: "/images/work-3.jpg",
-    alt: "Stacked finished hardwood panels in the workshop",
-    title: "Commercial Casework",
-    blurb: "Durable, precise cabinetry for offices, retail, and hospitality.",
-    href: "/services/commercial",
-  },
-];
+import { useMotionPresets } from "@/app/lib/hooks/useMotionPresets";
+import { OFFERINGS } from "@/app/lib/constants/home.constants";
+import ArrowButton from "../ui/ArrowButton";
 
 export default function Offerings() {
-  const reduce = useReducedMotion();
-
-  const container: Variants = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: reduce ? 0 : 0.12,
-        delayChildren: reduce ? 0 : 0.05,
-      },
-    },
-  };
-  const rise: Variants = {
-    hidden: { opacity: 0, y: reduce ? 0 : 24 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: reduce ? 0.01 : 0.6, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
+  const { container, rise } = useMotionPresets();
 
   return (
     <section
@@ -165,18 +118,9 @@ export default function Offerings() {
           variants={rise}
           className="mt-12 flex justify-center sm:mt-16"
         >
-          <Link
-            href="/about"
-            className="group inline-flex items-center gap-3 bg-taupe-raw px-8 py-3.5 font-display text-lg uppercase tracking-[0.06em] text-bone transition-colors hover:bg-bone hover:text-espresso-raw focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-accent"
-          >
+          <ArrowButton href="/about" variant="ink">
             About us
-            <ArrowRight
-              size={18}
-              strokeWidth={1.5}
-              aria-hidden="true"
-              className="transition-transform duration-300 group-hover:translate-x-1"
-            />
-          </Link>
+          </ArrowButton>
         </motion.div>
       </div>
     </section>

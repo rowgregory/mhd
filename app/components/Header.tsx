@@ -1,40 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { NAV, PHONE, PHONE_HREF } from "../lib/constants/common.constants";
 import { useNavDrawer } from "../lib/stores/useNavDrawer";
-import { useReducedMotion, motion, Variants } from "framer-motion";
+import { useReducedMotion, motion } from "framer-motion";
+import MhdLogo from "./MHDLogo";
+import ArrowButton from "./ui/ArrowButton";
+import { useMotionPresets } from "../lib/hooks/useMotionPresets";
 
 export default function Header() {
   const open = useNavDrawer((s) => s.open);
   const toggleDrawer = useNavDrawer((s) => s.toggleDrawer);
+  const { headerContainer, item, barSpring } = useMotionPresets();
   const reduce = useReducedMotion();
-
-  // Intro: parent staggers children; each settles down with a soft ease.
-  // Reduced-motion collapses distance/stagger so it just appears.
-  const container: Variants = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: reduce ? 0 : 0.08,
-        delayChildren: reduce ? 0 : 0.1,
-      },
-    },
-  };
-  const item: Variants = {
-    hidden: { opacity: 0, y: reduce ? 0 : -12 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: reduce ? 0.01 : 0.6, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
-
-  // Hamburger bar spring (Motion handles the morph instead of CSS).
-  const barSpring = reduce
-    ? { duration: 0.01 }
-    : { type: "spring" as const, stiffness: 420, damping: 30 };
 
   return (
     // Not fixed — sits in normal flow above the hero and scrolls away with it.
@@ -42,7 +20,7 @@ export default function Header() {
     <motion.header
       initial="hidden"
       animate="show"
-      variants={container}
+      variants={headerContainer}
       className="absolute inset-x-0 top-0 z-30 text-bone"
     >
       <div className="mx-auto px-4 sm:px-6 lg:px-14">
@@ -94,17 +72,19 @@ export default function Header() {
             </span>
           </motion.button>
 
-          {/* Center: wordmark — absolutely centered to the header width.
-              clamp keeps it on one line from 320px up. */}
+          {/* Center: logo — absolutely centered to the header width.
+              currentColor SVG: bone over the hero, brass on hover. The hero
+              is always dark, so the logo stays bone regardless of theme. */}
           <motion.div
             variants={item}
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
           >
             <Link
               href="/"
-              className="block whitespace-nowrap text-[clamp(1.05rem,5vw,1.875rem)] uppercase tracking-[0.18em] text-bone transition-colors hover:text-accent focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-accent"
+              aria-label="MHD Custom home"
+              className="block text-bone transition-colors hover:text-accent focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-accent"
             >
-              MHD&nbsp;Custom
+              <MhdLogo className="h-12 w-auto sm:h-20" aria-hidden="true" />
             </Link>
           </motion.div>
 
@@ -119,13 +99,9 @@ export default function Header() {
             >
               {PHONE}
             </a>
-            <Link
-              href="/contact"
-              className="hidden items-center gap-2 bg-taupe-raw px-4 py-2.5 uppercase text-bone transition-colors hover:bg-bone hover:text-espresso-raw focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-accent sm:inline-flex"
-            >
+            <ArrowButton href="/contact" variant="taupe" size="sm">
               Request a quote
-              <ArrowRight size={16} strokeWidth={1.5} aria-hidden="true" />
-            </Link>
+            </ArrowButton>
             {/* Spacer keeps the row balanced on mobile where right side is empty,
                 so the absolutely-centered wordmark stays optically centered. */}
             <span aria-hidden="true" className="block h-11 w-11 sm:hidden" />
@@ -142,7 +118,7 @@ export default function Header() {
             active = bone; underline wipes in left-to-right on hover. */}
         <nav aria-label="Primary" className="mt-4 hidden md:block">
           <motion.ul
-            variants={container}
+            variants={headerContainer}
             className="flex items-center justify-center gap-8 py-4"
           >
             {NAV.map((navItem) => {

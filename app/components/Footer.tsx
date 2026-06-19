@@ -1,48 +1,47 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   NAV,
   PHONE,
   PHONE_HREF,
   EMAIL,
+  SOCIALS,
+  HOURS,
+  SQYSH_URL,
 } from "../lib/constants/common.constants";
-
-const HOURS = [
-  "Mon–Fri: 8 AM – 5 PM",
-  "Saturday: by appointment",
-  "Sunday: closed",
-];
-
-const SOCIALS = [
-  {
-    label: "Facebook",
-    href: "https://facebook.com/mhdcustom",
-    Icon: FacebookIcon,
-  },
-];
+import { useMotionPresets } from "../lib/hooks/useMotionPresets";
+import MhdLogo from "./MHDLogo";
 
 export default function Footer() {
-  const reduce = useReducedMotion();
   const year = new Date().getFullYear();
-
-  const container: Variants = {
-    hidden: {},
-    show: { transition: { staggerChildren: reduce ? 0 : 0.1 } },
-  };
-  const rise: Variants = {
-    hidden: { opacity: 0, y: reduce ? 0 : 16 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: reduce ? 0.01 : 0.5, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
+  const { container, rise } = useMotionPresets();
 
   return (
     <footer className="bg-footer text-bone">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+        {/* Brand row — logo + tagline above the columns */}
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.4 }}
+          variants={rise}
+          className="mb-12 flex flex-col gap-4 border-b border-bone/15 pb-10 sm:mb-14 sm:pb-12"
+        >
+          <Link
+            href="/"
+            aria-label="MHD Custom home"
+            className="inline-flex w-fit text-bone transition-colors hover:text-accent focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-accent"
+          >
+            <MhdLogo className="h-12 w-auto sm:h-14" aria-hidden="true" />
+          </Link>
+          <p className="max-w-md font-sans text-sm leading-relaxed text-bone/60">
+            Custom cabinetry and fine woodwork, built by hand on Boston&rsquo;s
+            North Shore.
+          </p>
+        </motion.div>
+
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -133,7 +132,7 @@ export default function Footer() {
           <p className="font-sans text-xs text-bone/50">
             © {year} MHD Custom. All rights reserved. Built by{" "}
             <a
-              href="https://sqysh.io"
+              href={SQYSH_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="text-bone/70 transition-colors hover:text-accent focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-accent"
@@ -145,23 +144,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  );
-}
-
-/* ── Custom brand icons (Lucide has no social icons) ─────────────────────────
-   currentColor fills so they follow text color through hover. Decorative —
-   the link's aria-label carries the meaning. */
-type IconProps = { className?: string };
-
-function FacebookIcon({ className }: IconProps) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.52 1.49-3.91 3.78-3.91 1.1 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.78-1.63 1.57v1.88h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94Z" />
-    </svg>
   );
 }

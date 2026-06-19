@@ -26,6 +26,8 @@
   --taupe: #917e68; /* muted greige — secondary accent / border */
   --espresso: #504037; /* deep brown — surface band / card */
   --footer: #1c1a17; /* footer band — charcoal in light */
+  --danger: #8e3b2e; /* warm brick — errors, sits with the palette */
+  --danger-surface: #f3e4df; /* faint brick tint for alert backgrounds */
 
   /* lines (raw channels — use with alpha: border-line/15) */
   --line: 28 26 23;
@@ -48,6 +50,8 @@
   --color-taupe: var(--taupe);
   --color-espresso: var(--espresso);
   --color-footer: var(--footer);
+  --color-danger: var(--danger);
+  --color-danger-surface: var(--danger-surface);
   --color-line: rgb(var(--line));
 
   /* raw wood scale (mode-independent) */
@@ -96,6 +100,8 @@
     --taupe: #b3a189; /* lifted greige — stays legible on charcoal */
     --espresso: #5e4c41; /* lifted brown — keeps edge against charcoal page */
     --footer: #141210; /* darker than the page so the footer grounds the bottom */
+    --danger: #e08a78; /* lifted brick — legible on charcoal */
+    --danger-surface: #2a1815; /* deep brick tint for dark alert backgrounds */
 
     /* lines */
     --line: 245 241 234; /* bone channels */
@@ -209,5 +215,26 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .fill-link .fill-overlay {
     transition: none;
+  }
+}
+
+/* ── Theme transition ───────────────────────────────────────────────────────
+   Smoothly cross-fades the page when light/dark flips, instead of a hard snap.
+   Applied to html/body and section-level surfaces (the things that actually
+   change with the theme). Kept off interactive elements so hovers stay snappy.
+   Honors reduced-motion. */
+
+@media (prefers-reduced-motion: no-preference) {
+  html,
+  body,
+  header,
+  section,
+  footer,
+  main,
+  aside {
+    transition:
+      background-color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
 }

@@ -1,39 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import Picture from "../ui/Picture";
-
-const ITEMS = [
-  { n: "01", label: "Design consultation" },
-  { n: "02", label: "Shop fabrication" },
-  { n: "03", label: "On-site installation" },
-];
+import { useMotionPresets } from "@/app/lib/hooks/useMotionPresets";
+import { ITEMS } from "@/app/lib/constants/home.constants";
+import ArrowButton from "../ui/ArrowButton";
 
 export default function Feature() {
-  const reduce = useReducedMotion();
-
-  const container: Variants = {
-    hidden: {},
-    show: { transition: { staggerChildren: reduce ? 0 : 0.1 } },
-  };
-  const fromLeft: Variants = {
-    hidden: { opacity: 0, x: reduce ? 0 : -32 },
-    show: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: reduce ? 0.01 : 0.7, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
-  const fromRight: Variants = {
-    hidden: { opacity: 0, y: reduce ? 0 : 24 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: reduce ? 0.01 : 0.6, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
+  const { container, fromLeft, fromRight } = useMotionPresets();
 
   return (
     <section
@@ -106,7 +80,6 @@ export default function Feature() {
             shortcuts, just work that holds up for decades.
           </motion.p>
 
-          {/* Numbered process list */}
           <motion.ol variants={container} className="mt-10 space-y-0">
             {ITEMS.map(({ n, label }) => (
               <motion.li
@@ -128,18 +101,9 @@ export default function Feature() {
           </motion.ol>
 
           <motion.div variants={fromRight} className="mt-10">
-            <Link
-              href="/services"
-              className="group inline-flex items-center gap-3 bg-camel-light px-6 py-3.5 font-display text-lg uppercase tracking-[0.06em] text-bone transition-colors hover:bg-bone hover:text-espresso-raw focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-8"
-            >
+            <ArrowButton href="/services" variant="camel">
               Our services
-              <ArrowRight
-                size={18}
-                strokeWidth={1.5}
-                aria-hidden="true"
-                className="transition-transform duration-300 group-hover:translate-x-1"
-              />
-            </Link>
+            </ArrowButton>
           </motion.div>
         </motion.div>
       </div>
