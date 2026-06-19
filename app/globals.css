@@ -23,6 +23,9 @@
   --brand: #6b4a2e; /* walnut — brand anchor */
   --accent: #b08d57; /* brass — CTAs, highlight words */
   --accent-fg: #1c1a17; /* charcoal text on brass */
+  --taupe: #917e68; /* muted greige — secondary accent / border */
+  --espresso: #504037; /* deep brown — surface band / card */
+  --footer: #1c1a17; /* footer band — charcoal in light */
 
   /* lines (raw channels — use with alpha: border-line/15) */
   --line: 28 26 23;
@@ -44,17 +47,19 @@
   --color-accent-fg: var(--accent-fg);
   --color-taupe: var(--taupe);
   --color-espresso: var(--espresso);
+  --color-footer: var(--footer);
   --color-line: rgb(var(--line));
 
   /* raw wood scale (mode-independent) */
   --color-bone: #f5f1ea;
   --color-bone-deep: #e8e1d4;
+  --color-stone: #d4d0c3;
   --color-ink: #1c1a17;
   --color-ink-soft: #2a2622;
   --color-walnut: #6b4a2e;
   --color-walnut-dark: #4a3520;
-  --color-camel: #956935;
-  --color-camel-light: #b18856;
+  --color-camel: #a87d4f;
+  --color-camel-light: #be9468;
   --color-taupe-raw: #917e68;
   --color-espresso-raw: #504037;
   --color-brass: #b08d57;
@@ -90,6 +95,7 @@
     --accent-fg: #1c1a17;
     --taupe: #b3a189; /* lifted greige — stays legible on charcoal */
     --espresso: #5e4c41; /* lifted brown — keeps edge against charcoal page */
+    --footer: #141210; /* darker than the page so the footer grounds the bottom */
 
     /* lines */
     --line: 245 241 234; /* bone channels */

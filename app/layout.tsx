@@ -3,6 +3,7 @@ import { Bebas_Neue, Geist_Mono, Roboto } from "next/font/google";
 import "./globals.css";
 import NavDrawer from "./components/NavDrawer";
 import JsonLd from "./Jsonld";
+import Footer from "./components/Footer";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -140,7 +141,7 @@ export default function RootLayout({
     >
       <body>
         <JsonLd />
-        {children} <NavDrawer />
+        {children} <Footer /> <NavDrawer />
       </body>
     </html>
   );
