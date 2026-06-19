@@ -7,6 +7,7 @@ import StickyHeader from "./components/StickyHeader";
 import ConditionalFooter from "./components/ConditionalFooter";
 import { SITE_URL } from "./lib/constants/common.constants";
 import BuildCredit from "./components/BuildCredit";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -148,6 +149,7 @@ export default function RootLayout({
         <NavDrawer />
         <StickyHeader />
       </body>
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
     </html>
   );
 }

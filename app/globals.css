@@ -238,3 +238,57 @@ body {
       border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
 }
+
+/* ── Theme transition ───────────────────────────────────────────────────────
+   Smoothly cross-fades the page when light/dark flips, instead of a hard snap.
+   Applied to html/body and section-level surfaces (the things that actually
+   change with the theme). Kept off interactive elements so hovers stay snappy.
+   Honors reduced-motion. */
+
+@media (prefers-reduced-motion: no-preference) {
+  html,
+  body,
+  header,
+  section,
+  footer,
+  main,
+  aside {
+    transition:
+      background-color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+/* ── Admin (neutral) palette ─────────────────────────────────────────────────
+   The dashboard uses a cooler, neutral scale rather than the warm marketing
+   tokens — it should read as a tool, not the brand site. Mode-aware. */
+:root {
+  --admin-bg: #fafaf9; /* page */
+  --admin-surface: #ffffff; /* cards */
+  --admin-line: #e5e4e1; /* borders */
+  --admin-fg: #1c1a17; /* primary text */
+  --admin-fg-muted: #57544e; /* secondary text */
+  --admin-fg-subtle: #8a867e; /* hints */
+  --admin-accent: #b08d57; /* one brass touch ties it to the brand */
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --admin-bg: #161513;
+    --admin-surface: #1f1d1a;
+    --admin-line: #322f2b;
+    --admin-fg: #f5f1ea;
+    --admin-fg-muted: #a8a39a;
+    --admin-fg-subtle: #6e6a62;
+    --admin-accent: #c8a877;
+  }
+}
+@theme inline {
+  --color-admin-bg: var(--admin-bg);
+  --color-admin-surface: var(--admin-surface);
+  --color-admin-line: var(--admin-line);
+  --color-admin-fg: var(--admin-fg);
+  --color-admin-fg-muted: var(--admin-fg-muted);
+  --color-admin-fg-subtle: var(--admin-fg-subtle);
+  --color-admin-accent: var(--admin-accent);
+}

@@ -27,6 +27,17 @@ export default function LoginClient() {
 
   return (
     <main className="grid min-h-svh place-items-center bg-surface px-4 py-12 sm:px-6">
+      {/* Quiet build credit */}
+      <p className="fixed bottom-4 -translate-x-1/2 left-1/2 text-center font-sans text-xs text-fg-subtle">
+        <a
+          href={SQYSH_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-fg-muted transition-colors hover:text-accent focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-accent"
+        >
+          Sqysh
+        </a>
+      </p>
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -71,17 +82,6 @@ export default function LoginClient() {
             </p>
           )}
         </div>
-        {/* Quiet build credit */}
-        <p className="absolute bottom-4 -translate-x-1/2 left-1/2 text-center font-sans text-xs text-fg-subtle">
-          <a
-            href={SQYSH_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-fg-muted transition-colors hover:text-accent focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-accent"
-          >
-            Sqysh
-          </a>
-        </p>
       </motion.div>
     </main>
   );
