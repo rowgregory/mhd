@@ -1,0 +1,173 @@
+"use client";
+
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { NAV, PHONE, PHONE_HREF } from "../lib/constants/common.constants";
+import { useNavDrawer } from "../lib/stores/useNavDrawer";
+import { useReducedMotion, motion, Variants } from "framer-motion";
+
+export default function Header() {
+  const open = useNavDrawer((s) => s.open);
+  const toggleDrawer = useNavDrawer((s) => s.toggleDrawer);
+  const reduce = useReducedMotion();
+
+  // Intro: parent staggers children; each settles down with a soft ease.
+  // Reduced-motion collapses distance/stagger so it just appears.
+  const container: Variants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: reduce ? 0 : 0.08,
+        delayChildren: reduce ? 0 : 0.1,
+      },
+    },
+  };
+  const item: Variants = {
+    hidden: { opacity: 0, y: reduce ? 0 : -12 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: reduce ? 0.01 : 0.6, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
+
+  // Hamburger bar spring (Motion handles the morph instead of CSS).
+  const barSpring = reduce
+    ? { duration: 0.01 }
+    : { type: "spring" as const, stiffness: 420, damping: 30 };
+
+  return (
+    // Not fixed — sits in normal flow above the hero and scrolls away with it.
+    // Transparent so the hero image shows through; text is bone for contrast.
+    <motion.header
+      initial="hidden"
+      animate="show"
+      variants={container}
+      className="absolute inset-x-0 top-0 z-30 text-bone"
+    >
+      <div className="mx-auto px-4 sm:px-6 lg:px-14">
+        {/* Top row: hamburger · logo · phone + quote.
+            Relative so the wordmark can be absolutely centered to the page,
+            independent of the left/right cluster widths. */}
+        <div className="relative flex items-center justify-between py-4 sm:py-9">
+          {/* Left: custom hamburger — staggered bars (stacked-timber nod),
+              morphs to an X when open. Drives the drawer via the store. */}
+          <motion.button
+            variants={item}
+            type="button"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="site-nav-drawer"
+            onClick={toggleDrawer}
+            whileTap={reduce ? undefined : { scale: 0.92 }}
+            className="group -ml-2 inline-flex h-11 w-11 items-center justify-center focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-accent sm:ml-0"
+          >
+            <span aria-hidden="true" className="relative block h-4 w-6">
+              {/* top bar — rotates to one diagonal of the X */}
+              <motion.span
+                animate={
+                  open
+                    ? { y: 7, rotate: 45, width: 24 }
+                    : { y: 0, rotate: 0, width: 24 }
+                }
+                transition={barSpring}
+                className="absolute left-0 top-0 h-0.5 origin-center bg-bone transition-colors duration-300 group-hover:bg-accent"
+              />
+              {/* middle bar — short hand-cut detail; fades out */}
+              <motion.span
+                animate={
+                  open ? { opacity: 0, width: 0 } : { opacity: 1, width: 16 }
+                }
+                transition={barSpring}
+                className="absolute left-0 top-1.75 h-0.5 bg-bone transition-colors duration-300 group-hover:bg-accent"
+              />
+              {/* bottom bar — rotates to the other diagonal */}
+              <motion.span
+                animate={
+                  open
+                    ? { y: -7, rotate: -45, width: 24 }
+                    : { y: 0, rotate: 0, width: 20 }
+                }
+                transition={barSpring}
+                className="absolute left-0 bottom-0 h-0.5 origin-center bg-bone transition-colors duration-300 group-hover:bg-accent"
+              />
+            </span>
+          </motion.button>
+
+          {/* Center: wordmark — absolutely centered to the header width.
+              clamp keeps it on one line from 320px up. */}
+          <motion.div
+            variants={item}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+          >
+            <Link
+              href="/"
+              className="block whitespace-nowrap text-[clamp(1.05rem,5vw,1.875rem)] uppercase tracking-[0.18em] text-bone transition-colors hover:text-accent focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-accent"
+            >
+              MHD&nbsp;Custom
+            </Link>
+          </motion.div>
+
+          {/* Right: phone (hidden until lg) + quote CTA (hidden until sm) */}
+          <motion.div
+            variants={item}
+            className="flex items-center gap-4 sm:gap-6"
+          >
+            <a
+              href={PHONE_HREF}
+              className="hidden text-[22px] text-bone transition-colors hover:text-accent focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-accent lg:inline-block"
+            >
+              {PHONE}
+            </a>
+            <Link
+              href="/contact"
+              className="hidden items-center gap-2 bg-taupe-raw px-4 py-2.5 uppercase text-bone transition-colors hover:bg-bone hover:text-espresso-raw focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-accent sm:inline-flex"
+            >
+              Request a quote
+              <ArrowRight size={16} strokeWidth={1.5} aria-hidden="true" />
+            </Link>
+            {/* Spacer keeps the row balanced on mobile where right side is empty,
+                so the absolutely-centered wordmark stays optically centered. */}
+            <span aria-hidden="true" className="block h-11 w-11 sm:hidden" />
+          </motion.div>
+        </div>
+
+        {/* Divider hairline (matches reference) */}
+        <motion.div
+          variants={item}
+          className="hidden h-px w-full bg-bone/20 md:block"
+        />
+
+        {/* Bottom row: primary nav (desktop). Inactive = stone (#D4D0C3),
+            active = bone; underline wipes in left-to-right on hover. */}
+        <nav aria-label="Primary" className="mt-4 hidden md:block">
+          <motion.ul
+            variants={container}
+            className="flex items-center justify-center gap-8 py-4"
+          >
+            {NAV.map((navItem) => {
+              const active = navItem.href === "/";
+              return (
+                <motion.li key={navItem.href} variants={item}>
+                  <Link
+                    href={navItem.href}
+                    aria-current={active ? "page" : undefined}
+                    className={`relative pb-1 text-lg uppercase leading-none transition-colors focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-accent
+            before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 before:origin-left before:bg-bone before:transition-transform before:duration-300 before:ease-out
+            ${
+              active
+                ? "text-bone before:scale-x-100"
+                : "text-stone before:scale-x-0 hover:text-bone hover:before:scale-x-100"
+            }`}
+                  >
+                    {navItem.label}
+                  </Link>
+                </motion.li>
+              );
+            })}
+          </motion.ul>
+        </nav>
+      </div>
+    </motion.header>
+  );
+}

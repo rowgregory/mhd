@@ -1,0 +1,207 @@
+@import "tailwindcss";
+
+/* MHD Custom — boutique cabinetry & woodwork.
+   Palette: bone / charcoal / walnut / camel / brass (Fortunio reference).
+   Semantic tokens flip per mode below; build against bg-surface / text-fg /
+   text-accent etc. Never raw hex in JSX. */
+
+:root {
+  /* base (kept from the starter, repointed to the bone/charcoal palette) */
+  --background: #f5f1ea; /* bone */
+  --foreground: #1c1a17; /* charcoal */
+
+  /* surfaces */
+  --surface: #f5f1ea; /* bone — page bg */
+  --surface-alt: #e8e1d4; /* deep bone — cards, alt rows */
+
+  /* text */
+  --fg: #1c1a17; /* charcoal — primary text */
+  --fg-muted: #4a3520; /* aged oak — secondary copy */
+  --fg-subtle: #6b4a2e; /* walnut — captions / mono labels */
+
+  /* brand + accent */
+  --brand: #6b4a2e; /* walnut — brand anchor */
+  --accent: #b08d57; /* brass — CTAs, highlight words */
+  --accent-fg: #1c1a17; /* charcoal text on brass */
+
+  /* lines (raw channels — use with alpha: border-line/15) */
+  --line: 28 26 23;
+}
+
+@theme inline {
+  /* base */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* semantic (mode-aware) */
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-brand: var(--brand);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-taupe: var(--taupe);
+  --color-espresso: var(--espresso);
+  --color-line: rgb(var(--line));
+
+  /* raw wood scale (mode-independent) */
+  --color-bone: #f5f1ea;
+  --color-bone-deep: #e8e1d4;
+  --color-ink: #1c1a17;
+  --color-ink-soft: #2a2622;
+  --color-walnut: #6b4a2e;
+  --color-walnut-dark: #4a3520;
+  --color-camel: #956935;
+  --color-camel-light: #b18856;
+  --color-taupe-raw: #917e68;
+  --color-espresso-raw: #504037;
+  --color-brass: #b08d57;
+  --color-brass-light: #c8a877;
+
+  /* type */
+  --font-display: var(--font-bebas), sans-serif; /* Bebas Neue — headlines */
+  --font-sans: var(--font-roboto), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+
+  /* label tracking helper: text-[10px] tracking-label uppercase */
+  --tracking-label: 0.2em;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* base */
+    --background: #1c1a17; /* charcoal */
+    --foreground: #f5f1ea; /* bone */
+
+    /* surfaces */
+    --surface: #1c1a17;
+    --surface-alt: #2a2622; /* soft ink — raised cards */
+
+    /* text */
+    --fg: #f5f1ea;
+    --fg-muted: #c9c2b5; /* warm bone-gray — secondary copy */
+    --fg-subtle: #b08d57; /* brass — labels glow warm on dark */
+
+    /* brand + accent */
+    --brand: #be9468; /* camel-light — walnut goes muddy on charcoal */
+    --accent: #c8a877; /* brass-light — brighter so CTAs pop on dark */
+    --accent-fg: #1c1a17;
+    --taupe: #b3a189; /* lifted greige — stays legible on charcoal */
+    --espresso: #5e4c41; /* lifted brown — keeps edge against charcoal page */
+
+    /* lines */
+    --line: 245 241 234; /* bone channels */
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family:
+    var(--font-bebas), var(--font-roboto), Arial, Helvetica, sans-serif;
+}
+
+/* ── Hero intro animation ───────────────────────────────────────────────────
+   Headline lines rise out of a clipped mask (reveals like a panel sliding off
+   finished work); eyebrow + CTA follow with a soft rise. Staggered via inline
+   animation-delay in the component. Honors reduced-motion. */
+
+@keyframes hero-rise {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mask wrapper clips the rising line so it appears to emerge from a hard edge */
+.hero-line-mask {
+  overflow: hidden;
+  padding-bottom: 0.08em; /* room for descenders so they don't clip */
+}
+.hero-line {
+  display: block;
+  transform: translateY(110%);
+  animation: hero-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero-rise-item {
+  opacity: 0;
+  animation: hero-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-line,
+  .hero-rise-item {
+    animation: hero-fade-up 0.01s linear forwards;
+    transform: none;
+  }
+}
+
+/* ── Hero background slow zoom (Ken Burns) ──────────────────────────────────
+   Image starts at 1 and pushes to 1.08 over 10s on load. forwards holds the
+   end state. Honors reduced-motion. Apply .hero-zoom to the image element. */
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+.hero-zoom {
+  animation: hero-zoom 10s ease-out forwards;
+  transform-origin: center;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-zoom {
+    animation: none;
+    transform: none;
+  }
+}
+
+/* ── Drawer link brass-fill wipe ────────────────────────────────────────────
+   Two stacked copies of the label; the brass overlay is clipped to 0 width and
+   wipes to full on hover/focus, sweeping color left-to-right across the type. */
+
+.fill-link {
+  position: relative;
+  display: inline-block;
+}
+.fill-link .fill-overlay {
+  position: absolute;
+  inset: 0;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--accent);
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+.fill-link:hover .fill-overlay,
+.fill-link:focus-visible .fill-overlay {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fill-link .fill-overlay {
+    transition: none;
+  }
+}

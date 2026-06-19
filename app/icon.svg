@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="MHD Custom">
+  <rect width="512" height="512" fill="#1C1A17"/>
+  <path d="M 128 392
+           L 128 120
+           L 196 120
+           L 256 280
+           L 316 120
+           L 384 120
+           L 384 392
+           L 320 392
+           L 320 212
+           L 274 340
+           L 238 340
+           L 192 212
+           L 192 392
+           Z"
+        fill="#B08D57"/>
+</svg>
