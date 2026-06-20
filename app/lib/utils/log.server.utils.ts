@@ -3,7 +3,7 @@
 import { headers } from "next/headers";
 import prisma from "@/prisma/client";
 import { LogLevel, LogCategory, Prisma } from "@prisma/client";
-import { getActor } from "../actions/getActor";
+import { getActor } from "../actions/user/getActor";
 
 // Severity ordering for gating. Anything below MIN_LEVEL is dropped before it
 // hits the DB — keeps the table from bloating with DEBUG noise in prod.

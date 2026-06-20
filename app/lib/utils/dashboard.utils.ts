@@ -1,4 +1,4 @@
-import { getActor } from "../actions/getActor";
+import { getActor } from "../actions/user/getActor";
 
 export async function requireAdmin() {
   const actor = await getActor();

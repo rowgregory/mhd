@@ -1,9 +1,9 @@
-import { getDashboardStats } from "@/app/lib/actions/getDashboardStats";
-import DashboardClient from "./DashboardClient";
 import { getActor } from "@/app/lib/actions/user/getActor";
+import { listAdmins } from "@/app/lib/actions/user";
+import UsersClient from "./UsersClient";
 
-export default async function DashboardPage() {
-  const [actor, res] = await Promise.all([getActor(), getDashboardStats()]);
+export default async function UsersPage() {
+  const [actor, res] = await Promise.all([getActor(), listAdmins()]);
 
   if (!res.success) {
     return (
@@ -16,6 +16,12 @@ export default async function DashboardPage() {
       </main>
     );
   }
-  const firstName = actor?.name?.trim().split(/\s+/)[0] ?? null;
-  return <DashboardClient stats={res.data} name={firstName} />;
+
+  return (
+    <UsersClient
+      initial={res.data}
+      currentUserId={actor?.id ?? ""}
+      isSuperUser={actor?.role === "SUPER_USER"}
+    />
+  );
 }

@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { getActor } from "../lib/actions/getActor";
+import { getActor } from "../lib/actions/user/getActor";
 
 export default async function DashboardLayout({
   children,

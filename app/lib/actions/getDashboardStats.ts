@@ -1,14 +1,12 @@
 "use server";
 
 import prisma from "@/prisma/client";
-import { getActor } from "./getActor";
 import { Result } from "@/types/admin.types";
+import { requireAdmin } from "../utils/dashboard.utils";
 
 export async function getDashboardStats(): Promise<Result> {
-  const actor = await getActor();
-  if (!actor || (actor.role !== "ADMIN" && actor.role !== "SUPER_USER")) {
-    return { success: false, error: "Not authorized." };
-  }
+  const actor = await requireAdmin();
+  if (!actor) return { success: false, error: "Not authorized." };
 
   try {
     const [
