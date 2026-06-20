@@ -5,8 +5,8 @@
 
 const CREDIT = `
   ┌─────────────────────────────────────────────┐
-  │  MHD Custom — designed & built by Sqysh       │
-  │  https://sqysh.io                             │
+  │  MHD Custom — designed & built by Sqysh     │
+  │  https://sqysh.io                           │
   └─────────────────────────────────────────────┘
 `;
 

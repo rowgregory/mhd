@@ -70,7 +70,7 @@ export default function DashboardClient({
       <header className="border-b border-admin-line">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3.5 sm:px-6">
           <Link
-            href="/dashboard"
+            href="/"
             aria-label="MHD Custom dashboard"
             className="flex items-center gap-2.5 text-admin-fg transition-colors hover:text-admin-accent focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-admin-accent"
           >

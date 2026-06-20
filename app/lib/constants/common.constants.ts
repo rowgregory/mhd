@@ -15,6 +15,9 @@ export const EMAIL = "jrogers@mhdcustomllc.com";
 export const SQYSH_URL = "https://sqysh.io";
 export const ANALYTICS_URL =
   "https://analytics.google.com/analytics/web/provision/?authuser=1#/a398431180p542336020/reports/intelligenthome";
+export const RESEND_FROM_EMAIL = "noreply@mhdcustomllc.com";
+export const ADDRESS_LINE1 = "North Shore, MA";
+export const ADDRESS_LINE2 = "Serving Greater Boston";
 
 export const HOURS = [
   "Mon–Fri: 8 AM – 5 PM",

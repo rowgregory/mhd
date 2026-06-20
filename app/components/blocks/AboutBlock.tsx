@@ -3,7 +3,7 @@
 import { SERVICES } from "@/app/lib/constants/home.constants";
 import { useMotionPresets } from "@/app/lib/hooks/useMotionPresets";
 import { motion } from "framer-motion";
-import { WoodGrainTexture } from "../WoodGrainTexture";
+import { WoodGrainTexture } from "../textures/WoodGrainTexture";
 
 export default function About() {
   const { container, rise } = useMotionPresets();
@@ -49,9 +49,6 @@ export default function About() {
           {SERVICES.map(({ icon: Icon, title, blurb }) => (
             <motion.li key={title} variants={rise}>
               <article className="group relative isolate flex h-full flex-col items-center overflow-hidden border border-line/10 bg-surface px-6 py-10 text-center">
-                {/* Hover fill wipes up from the bottom. Light mode: dark ink
-                    fill pops against the camel band. Dark mode: the card is
-                    already dark, so it fills brass instead — pops the other way. */}
                 <span
                   aria-hidden="true"
                   className="absolute inset-0 -z-10 origin-bottom scale-y-0 bg-ink transition-transform duration-450 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-y-100 dark:bg-accent"
