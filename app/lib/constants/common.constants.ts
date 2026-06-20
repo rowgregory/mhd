@@ -13,7 +13,8 @@ export const PHONE = "1 781 248 2736";
 export const PHONE_HREF = "tel:+17815550142";
 export const EMAIL = "jrogers@mhdcustomllc.com";
 export const SQYSH_URL = "https://sqysh.io";
-export const ANALYTICS_URL = "https://analytics.google.com/";
+export const ANALYTICS_URL =
+  "https://analytics.google.com/analytics/web/provision/?authuser=1#/a398431180p542336020/reports/intelligenthome";
 
 export const HOURS = [
   "Mon–Fri: 8 AM – 5 PM",

@@ -15,3 +15,10 @@ export type DashboardStats = {
 export type Result =
   | { success: true; data: DashboardStats }
   | { success: false; error: string };
+
+export type AdminDrawerProps = {
+  open: boolean;
+  onClose: () => void;
+  title: string;
+  children: React.ReactNode;
+};

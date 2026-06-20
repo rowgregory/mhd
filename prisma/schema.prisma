@@ -167,8 +167,7 @@ model Testimonial {
   title   String? // "Owner", "CEO", "Marketing Director"
   company String?
 
-  quote     String
-  avatarUrl String? // optional photo/logo
+  quote String
 
   order     Int     @default(0)
   isVisible Boolean @default(true)
@@ -177,4 +176,43 @@ model Testimonial {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("testimonials")
+}
+
+model Log {
+  id String @id @default(cuid())
+
+  level    LogLevel
+  category LogCategory @default(GENERAL)
+  message  String
+
+  // who/where — all optional so system + unauthenticated events still log
+  actorId   String? @map("actor_id") // User.id if signed in
+  actorName String? @map("actor_name") @db.VarChar(160) // denormalized for fast reads
+  ip        String? @db.VarChar(45) // supports IPv6
+
+  // arbitrary structured context (changed fields, ids, etc.)
+  metadata Json?
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([level, createdAt(sort: Desc)])
+  @@index([category, createdAt(sort: Desc)])
+  @@map("logs")
+}
+
+enum LogLevel {
+  DEBUG
+  INFO
+  WARN
+  ERROR
+}
+
+enum LogCategory {
+  GENERAL
+  AUTH // sign-in, sign-out, access denied
+  INQUIRY // contact submissions, status changes
+  PROJECT // project + photo edits
+  TESTIMONIAL // testimonial edits / visibility
+  USER // admin/role changes
+  SYSTEM // crons, webhooks, background jobs
 }

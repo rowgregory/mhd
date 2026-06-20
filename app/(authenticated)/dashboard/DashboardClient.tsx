@@ -29,7 +29,7 @@ export default function DashboardClient({
 
   const cards = [
     {
-      href: "/admin/inquiries",
+      href: "/dashboard/inquiries",
       icon: Mail,
       value: inquiries.total,
       label: "Inquiries",
@@ -39,7 +39,7 @@ export default function DashboardClient({
         : "No inquiries yet",
     },
     {
-      href: "/admin/projects",
+      href: "/dashboard/projects",
       icon: ImageIcon,
       value: projects.total,
       label: "Projects",
@@ -47,7 +47,7 @@ export default function DashboardClient({
       sub: projects.latest ? `Latest: ${projects.latest}` : "No projects yet",
     },
     {
-      href: "/admin/testimonials",
+      href: "/dashboard/testimonials",
       icon: Quote,
       value: testimonials.total,
       label: "Testimonials",
@@ -55,7 +55,7 @@ export default function DashboardClient({
       sub: `${testimonials.visible} visible · ${testimonials.hidden} hidden`,
     },
     {
-      href: "/admin/users",
+      href: "/dashboard/users",
       icon: Users,
       value: admins.total,
       label: "Admins",

@@ -38,7 +38,7 @@ const Picture: FC<PictureProps> = ({
   quality,
   placeholder,
   blurDataURL,
-  sizes,
+  sizes = "100vw",
   ...dim
 }) => {
   // shared props for both modes
