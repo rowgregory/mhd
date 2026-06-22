@@ -99,6 +99,19 @@ export function useMotionPresets() {
     },
   };
 
+  const tileVariants = (i: number): Variants => ({
+    hidden: { opacity: 0, scale: reduce ? 1 : 1.02 },
+    show: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: i === 0 ? 0.7 : 0.6,
+        ease: [0.22, 1, 0.36, 1],
+        delay: Math.min(0.05 * i, 0.4),
+      },
+    },
+  });
+
   return {
     reduce,
     ease,
@@ -111,5 +124,6 @@ export function useMotionPresets() {
     barSpring,
     drawerPanel,
     drawerLink,
+    tileVariants,
   };
 }

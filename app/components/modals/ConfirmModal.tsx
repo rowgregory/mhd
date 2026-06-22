@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { AlertTriangle } from "lucide-react";
-import { useEscapeToCancel } from "@/app/lib/hooks/useEscapeToCanel";
+import { useEscapeToClose } from "@/app/lib/hooks/useEscapeToClose";
 
 type ConfirmModalProps = {
   open: boolean;
@@ -38,7 +38,7 @@ export default function ConfirmModal({
     }
   }, [open]);
 
-  useEscapeToCancel(open, onCancel);
+  useEscapeToClose(open, onCancel);
 
   return (
     <AnimatePresence>

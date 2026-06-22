@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export function useEscapeToCancel(open: boolean, onCancel: () => void) {
+export function useEscapeToClose(open: boolean, onCancel: () => void) {
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
