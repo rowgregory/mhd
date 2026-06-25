@@ -78,9 +78,7 @@ export function useMotionPresets() {
             type: "spring",
             stiffness: 260,
             damping: 32,
-            when: "beforeChildren",
-            staggerChildren: 0.06,
-            delayChildren: 0.12,
+            staggerChildren: 0.08,
           },
     },
     exit: {

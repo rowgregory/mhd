@@ -1,4 +1,4 @@
-import { Collection, Offering, Project, Service } from "@/types/home.types";
+import { Offering, Project, Service } from "@/types/home.types";
 import { Trees, Hammer, Ruler, PackageCheck } from "lucide-react";
 
 export const SERVICES: Service[] = [
@@ -24,57 +24,83 @@ export const SERVICES: Service[] = [
   },
 ];
 
-export const COLLECTIONS: Collection[] = [
+export const PROJECT_TYPES = [
   {
-    img: "/images/collection-1.jpg",
-    alt: "Shaker-style kitchen cabinetry in painted maple",
-    name: "The Marblehead",
-    style: "Shaker · painted maple",
-    href: "/contact?collection=marblehead",
+    img: "/images/type-kitchen.jpeg",
+    alt: "Custom kitchen cabinetry",
+    name: "Kitchens",
+    style: "The heart of the home",
+    href: "/portfolio",
   },
   {
-    img: "/images/collection-2.jpg",
-    alt: "Flat-panel walnut cabinetry with integrated pulls",
-    name: "The Atlantic",
-    style: "Flat panel · walnut",
-    href: "/contact?collection=atlantic",
+    img: "/images/type-builtins.jpeg",
+    alt: "Built-in shelving and cabinetry",
+    name: "Built-Ins",
+    style: "Shelving, nooks, window seats",
+    href: "/portfolio",
   },
   {
-    img: "/images/collection-3.jpg",
-    alt: "Beaded inset white oak cabinetry, traditional detailing",
-    name: "The Heritage",
-    style: "Beaded inset · white oak",
-    href: "/contact?collection=heritage",
+    img: "/images/type-bath.jpeg",
+    alt: "Custom bathroom vanity",
+    name: "Bath & Vanities",
+    style: "Vanities and linen storage",
+    href: "/portfolio",
   },
-];
+  {
+    img: "/images/type-mudroom.jpg",
+    alt: "Mudroom lockers and bench",
+    name: "Mudrooms",
+    style: "Lockers, benches, cubbies",
+    href: "/portfolio",
+  },
+  {
+    img: "/images/type-office.jpeg",
+    alt: "Home office built-in desk and shelving",
+    name: "Offices & Libraries",
+    style: "Desks, bookcases, storage",
+    href: "/portfolio",
+  },
+  {
+    img: "/images/type-closet.jpg",
+    alt: "Fitted closet and wardrobe system",
+    name: "Closets",
+    style: "Fitted wardrobes and storage",
+    href: "/portfolio",
+  },
+] as const;
 
 export const ITEMS = [
   { n: "01", label: "Design consultation" },
-  { n: "02", label: "Shop fabrication" },
-  { n: "03", label: "On-site installation" },
+  { n: "02", label: "On-site installation" },
 ];
 
 export const OFFERINGS: Offering[] = [
   {
-    img: "/images/work-1.jpg",
-    alt: "Custom hardwood kitchen cabinetry installed in a bright home",
-    title: "Kitchens & Cabinetry",
-    blurb: "Full custom kitchens, islands, and storage built to your space.",
-    href: "/services/kitchens",
+    img: "/images/inset.jpg",
+    alt: "Inset cabinetry with doors set flush inside the face frame",
+    title: "Inset",
+    subtitle: "Flush-set doors",
+    blurb:
+      "Doors and drawers set flush within the frame for tight, even reveals. The most exacting style we build — traditional, refined, and unmistakably handcrafted.",
+    href: "/portfolio",
   },
   {
-    img: "/images/work-2.jpg",
-    alt: "A craftsman fitting a built-in shelving unit",
-    title: "Built-Ins & Millwork",
-    blurb: "Shelving, wall units, and trim that look original to the room.",
-    href: "/services/built-ins",
+    img: "/images/overlay.jpg",
+    alt: "Full overlay cabinetry with clean, modern door fronts",
+    title: "Overlay",
+    subtitle: "Clean & modern",
+    blurb:
+      "Door fronts that sit over the frame for clean lines and a contemporary feel. Versatile and timeless, tailored to the proportions of your space.",
+    href: "/portfolio",
   },
   {
-    img: "/images/work-3.jpg",
-    alt: "Stacked finished hardwood panels in the workshop",
-    title: "Commercial Casework",
-    blurb: "Durable, precise cabinetry for offices, retail, and hospitality.",
-    href: "/services/commercial",
+    img: "/images/pencil-bead.jpg",
+    alt: "Beaded inset cabinetry with a fine pencil bead detail around each opening",
+    title: "Pencil Bead",
+    subtitle: "Beaded detail",
+    blurb:
+      "Inset construction with a delicate bead routed around every opening. A classic, detail-rich touch that brings warmth and character to a room.",
+    href: "/portfolio",
   },
 ];
 

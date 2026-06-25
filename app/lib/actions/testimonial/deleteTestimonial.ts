@@ -9,9 +9,8 @@ import { Result } from "@/types/testimonial.types";
 
 export async function deleteTestimonial(id: string): Promise<Result> {
   const actor = await requireAdmin();
-  if (!actor) {
-    return { success: false, error: "Not authorized." };
-  }
+  if (!actor) return { success: false, error: "Not authorized." };
+
   try {
     const row = await prisma.testimonial.delete({
       where: { id },

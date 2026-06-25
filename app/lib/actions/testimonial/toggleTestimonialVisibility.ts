@@ -12,9 +12,8 @@ export async function toggleTestimonialVisibility(
   isVisible: boolean,
 ): Promise<Result> {
   const actor = await requireAdmin();
-  if (!actor) {
-    return { success: false, error: "Not authorized." };
-  }
+  if (!actor) return { success: false, error: "Not authorized." };
+
   try {
     const row = await prisma.testimonial.update({
       where: { id },

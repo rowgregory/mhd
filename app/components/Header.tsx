@@ -2,16 +2,14 @@
 
 import Link from "next/link";
 import { NAV, PHONE, PHONE_HREF } from "../lib/constants/common.constants";
-import { useNavDrawer } from "../lib/stores/useNavDrawer";
 import { motion } from "framer-motion";
 import MhdLogo from "./MHDLogo";
 import ArrowButton from "./ui/ArrowButton";
 import { useMotionPresets } from "../lib/hooks/useMotionPresets";
+import { BurgerButton } from "./ui/BurgerButton";
 
 export default function Header() {
-  const open = useNavDrawer((s) => s.open);
-  const toggleDrawer = useNavDrawer((s) => s.toggleDrawer);
-  const { item, barSpring, reduce, makeContainer } = useMotionPresets();
+  const { item, makeContainer } = useMotionPresets();
   const headerContainer = makeContainer(0.08, 0.1);
 
   return (
@@ -30,47 +28,7 @@ export default function Header() {
         <div className="relative flex items-center justify-between py-4 sm:py-9">
           {/* Left: custom hamburger — staggered bars (stacked-timber nod),
               morphs to an X when open. Drives the drawer via the store. */}
-          <motion.button
-            variants={item}
-            type="button"
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            aria-controls="site-nav-drawer"
-            onClick={toggleDrawer}
-            whileTap={reduce ? undefined : { scale: 0.92 }}
-            className="group -ml-2 inline-flex h-11 w-11 items-center justify-center focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-accent sm:ml-0"
-          >
-            <span aria-hidden="true" className="relative block h-4 w-6">
-              {/* top bar — rotates to one diagonal of the X */}
-              <motion.span
-                animate={
-                  open
-                    ? { y: 7, rotate: 45, width: 24 }
-                    : { y: 0, rotate: 0, width: 24 }
-                }
-                transition={barSpring}
-                className="absolute left-0 top-0 h-0.5 origin-center bg-bone transition-colors duration-300 group-hover:bg-accent"
-              />
-              {/* middle bar — short hand-cut detail; fades out */}
-              <motion.span
-                animate={
-                  open ? { opacity: 0, width: 0 } : { opacity: 1, width: 16 }
-                }
-                transition={barSpring}
-                className="absolute left-0 top-1.75 h-0.5 bg-bone transition-colors duration-300 group-hover:bg-accent"
-              />
-              {/* bottom bar — rotates to the other diagonal */}
-              <motion.span
-                animate={
-                  open
-                    ? { y: -7, rotate: -45, width: 24 }
-                    : { y: 0, rotate: 0, width: 20 }
-                }
-                transition={barSpring}
-                className="absolute left-0 bottom-0 h-0.5 origin-center bg-bone transition-colors duration-300 group-hover:bg-accent"
-              />
-            </span>
-          </motion.button>
+          <BurgerButton />
 
           {/* Center: logo — absolutely centered to the header width.
               currentColor SVG: bone over the hero, brass on hover. The hero
@@ -99,9 +57,11 @@ export default function Header() {
             >
               {PHONE}
             </a>
-            <ArrowButton href="/contact" variant="taupe" size="sm">
-              Request a quote
-            </ArrowButton>
+            <div className="hidden lg:block">
+              <ArrowButton href="/contact" variant="taupe" size="sm">
+                Request a quote
+              </ArrowButton>
+            </div>
             {/* Spacer keeps the row balanced on mobile where right side is empty,
                 so the absolutely-centered wordmark stays optically centered. */}
             <span aria-hidden="true" className="block h-11 w-11 sm:hidden" />

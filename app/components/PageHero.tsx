@@ -1,22 +1,22 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import Picture from "./ui/Picture";
 import InnerHeader from "./InnerHeader";
+import Picture from "./ui/Picture";
 
 type PageHeroProps = {
-  /** Page title shown centered over the photo. */
   title: string;
-  /** Optional eyebrow line above the title. */
   eyebrow?: string;
-  /** Hero background image path (from /public). */
   src: string;
-  /** Alt text for the background image. */
   alt?: string;
-  /** How tall the hero should be. Defaults to a short inner-page height. */
   height?: "sm" | "md" | "lg";
-  /** Whether to show the scroll-down chevron. Default true. */
   showChevron?: boolean;
 };
 
@@ -35,22 +35,46 @@ export default function PageHero({
   showChevron = true,
 }: PageHeroProps) {
   const reduce = useReducedMotion();
+  const ref = useRef<HTMLElement>(null);
+
+  // Track this hero's scroll progress. Since it's at the top of the page it
+  // starts fully in view; the parallax plays as it scrolls up and out.
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+
+  // Drift the oversized image down as the hero scrolls away.
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+
+  // add: content drifts down slower than the page, so it lingers.
+  // Positive y = moves down as you scroll = counteracts the upward scroll = stays on screen longer.
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  // optional: fade it out near the end so it doesn't overlap the next section
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.6, 1], [1, 1, 0]);
 
   return (
     // The header is absolute inside this relative container — they scroll away
     // together as one locked unit (no sticky behaviour here).
     <section
+      ref={ref}
       className={`relative flex flex-col overflow-hidden ${HEIGHTS[height]}`}
     >
-      {/* Background photo */}
-      <Picture
-        fill
-        src={src}
-        alt={alt}
-        priority
-        className="object-cover object-center"
-        sizes="100vw"
-      />
+      {/* Parallax background photo — taller than the section so it can travel
+          without exposing edges. Static on mobile and for reduced motion. */}
+      <motion.div
+        style={reduce ? undefined : { y }}
+        className="absolute inset-x-0 top-[-10%] h-[130%] will-change-transform max-md:top-0! max-md:h-full! max-md:translate-y-0!"
+      >
+        <Picture
+          fill
+          src={src}
+          alt={alt}
+          priority
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+      </motion.div>
 
       {/* Dark overlay so text reads on any photo */}
       <div aria-hidden="true" className="absolute inset-0 bg-ink/55" />
@@ -60,7 +84,10 @@ export default function PageHero({
       <InnerHeader />
 
       {/* Centered page title */}
-      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 text-center">
+      <motion.div
+        style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}
+        className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 text-center will-change-transform"
+      >
         {eyebrow && (
           <motion.p
             initial={reduce ? false : { opacity: 0, y: 12 }}
@@ -83,7 +110,7 @@ export default function PageHero({
         >
           {title}
         </motion.h1>
-      </div>
+      </motion.div>
 
       {/* Scroll chevron */}
       {showChevron && (

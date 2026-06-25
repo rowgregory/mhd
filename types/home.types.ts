@@ -18,6 +18,7 @@ export type Offering = {
   img: string;
   alt: string;
   title: string;
+  subtitle?: string;
   blurb: string;
   href: string;
 };

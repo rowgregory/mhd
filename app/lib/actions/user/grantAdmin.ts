@@ -16,10 +16,6 @@ export async function grantAdmin(
   const actor = await requireAdmin();
   if (!actor) return { success: false, error: "Not authorized." };
 
-  if (actor.role !== "SUPER_USER" && actor.role !== "ADMIN") {
-    return { success: false, error: "Only a super user can add admins." };
-  }
-
   const normalized = email.trim().toLowerCase();
   if (!EMAIL_REGEX.test(normalized)) {
     return { success: false, error: "Enter a valid email address." };

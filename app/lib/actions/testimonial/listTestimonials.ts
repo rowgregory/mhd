@@ -1,11 +1,7 @@
 import { Result, TestimonialRecord } from "@/types/testimonial.types";
-import { requireAdmin } from "../../utils/dashboard.utils";
 import prisma from "@/prisma/client";
 
 export async function listTestimonials(): Promise<Result<TestimonialRecord[]>> {
-  if (!(await requireAdmin())) {
-    return { success: false, error: "Not authorized." };
-  }
   try {
     const rows = await prisma.testimonial.findMany({
       orderBy: [{ order: "asc" }, { createdAt: "desc" }],

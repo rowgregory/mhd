@@ -11,8 +11,9 @@
   --foreground: #1c1a17; /* charcoal */
 
   /* surfaces */
-  --surface: #f5f1ea; /* bone — page bg */
-  --surface-alt: #e8e1d4; /* deep bone — cards, alt rows */
+  --surface: #f0edde; /* bone — page bg */
+  /* --surface: #f5f1ea; bone — page bg */
+  --surface-alt: #e8e4d0; /* deep bone — cards, alt rows */
 
   /* text */
   --fg: #1c1a17; /* charcoal — primary text */
@@ -25,9 +26,12 @@
   --accent-fg: #1c1a17; /* charcoal text on brass */
   --taupe: #917e68; /* muted greige — secondary accent / border */
   --espresso: #504037; /* deep brown — surface band / card */
-  --footer: #1c1a17; /* footer band — charcoal in light */
+  --brown-text: #534339;
+  --footer: #35302a;
   --danger: #8e3b2e; /* warm brick — errors, sits with the palette */
   --danger-surface: #f3e4df; /* faint brick tint for alert backgrounds */
+  --muted-gray: #909090;
+  --warm-gray: #716a60;
 
   /* lines (raw channels — use with alpha: border-line/15) */
   --line: 28 26 23;
@@ -49,13 +53,14 @@
   --color-accent-fg: var(--accent-fg);
   --color-taupe: var(--taupe);
   --color-espresso: var(--espresso);
+  --color-brown-text: var(--brown-text);
   --color-footer: var(--footer);
   --color-danger: var(--danger);
   --color-danger-surface: var(--danger-surface);
   --color-line: rgb(var(--line));
 
   /* raw wood scale (mode-independent) */
-  --color-bone: #f5f1ea;
+  --color-bone: #f0edde;
   --color-bone-deep: #e8e1d4;
   --color-stone: #d4d0c3;
   --color-ink: #1c1a17;
@@ -63,11 +68,13 @@
   --color-walnut: #6b4a2e;
   --color-walnut-dark: #4a3520;
   --color-camel: #a87d4f;
-  --color-camel-light: #be9468;
+  --color-camel-light: #b18856;
   --color-taupe-raw: #917e68;
   --color-espresso-raw: #504037;
   --color-brass: #b08d57;
   --color-brass-light: #c8a877;
+  --color-muted-gray: var(--muted-gray);
+  --color-warm-gray: var(--warm-gray);
 
   /* type */
   --font-display: var(--font-bebas), sans-serif; /* Bebas Neue — headlines */
@@ -99,9 +106,12 @@
     --accent-fg: #1c1a17;
     --taupe: #b3a189; /* lifted greige — stays legible on charcoal */
     --espresso: #5e4c41; /* lifted brown — keeps edge against charcoal page */
+    --brown-text: #c9bab0;
     --footer: #141210; /* darker than the page so the footer grounds the bottom */
     --danger: #e08a78; /* lifted brick — legible on charcoal */
     --danger-surface: #2a1815; /* deep brick tint for dark alert backgrounds */
+    --muted-gray: #9a9a9a;
+    --warm-gray: #afaaa1;
 
     /* lines */
     --line: 245 241 234; /* bone channels */

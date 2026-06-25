@@ -4,9 +4,9 @@ import { requireAdmin } from "../../utils/dashboard.utils";
 import { projectSelect } from "../../selects/projects.selects";
 
 export async function getProject(id: string): Promise<Result<ProjectRecord>> {
-  if (!(await requireAdmin())) {
-    return { success: false, error: "Not authorized." };
-  }
+  const actor = await requireAdmin();
+  if (!actor) return { success: false, error: "Not authorized." };
+
   try {
     const row = await prisma.project.findUnique({
       where: { id },

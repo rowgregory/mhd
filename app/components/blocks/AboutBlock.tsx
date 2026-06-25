@@ -1,19 +1,45 @@
 "use client";
 
+import { useRef } from "react";
 import { SERVICES } from "@/app/lib/constants/home.constants";
 import { useMotionPresets } from "@/app/lib/hooks/useMotionPresets";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
 import { WoodGrainTexture } from "../textures/WoodGrainTexture";
 
 export default function About() {
   const { container, rise } = useMotionPresets();
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLElement>(null);
+
+  // Track this section's scroll progress through the viewport, then drift the
+  // wood-grain texture as it passes — content stays put, texture moves behind.
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const textureY = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
 
   return (
     <section
+      ref={ref}
       aria-labelledby="about-heading"
       className="relative overflow-hidden bg-camel px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
     >
-      <WoodGrainTexture />
+      {/* Parallax texture — oversized so it can travel without exposing edges.
+          Static on mobile and for reduced motion. */}
+      <motion.div
+        aria-hidden="true"
+        style={reduce ? undefined : { y: textureY }}
+        className="absolute inset-x-0 top-[-12%] h-[124%] will-change-transform max-md:top-0! max-md:h-full! max-md:translate-y-0!"
+      >
+        <WoodGrainTexture />
+      </motion.div>
+
       <div className="relative mx-auto max-w-6xl">
         {/* Eyebrow + heading */}
         <motion.div

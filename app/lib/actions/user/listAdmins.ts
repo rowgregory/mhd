@@ -4,9 +4,9 @@ import prisma from "@/prisma/client";
 import { userSelect } from "../../selects/user.selects";
 
 export async function listAdmins(): Promise<Result<UserRecord[]>> {
-  if (!(await requireAdmin())) {
-    return { success: false, error: "Not authorized." };
-  }
+  const actor = await requireAdmin();
+  if (!actor) return { success: false, error: "Not authorized." };
+
   try {
     const rows = await prisma.user.findMany({
       where: { role: { in: ["ADMIN", "SUPER_USER"] } },

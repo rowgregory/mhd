@@ -1,7 +1,12 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Picture from "../ui/Picture";
 import { PROJECTS } from "@/app/lib/constants/home.constants";
@@ -10,8 +15,6 @@ export default function Work() {
   const reduce = useReducedMotion();
   const trackRef = useRef<HTMLUListElement>(null);
 
-  // Nudge the scroller by roughly one card. Buttons are the keyboard/AT-friendly
-  // alternative to dragging — the whole thing is operable without a mouse.
   const scrollBy = (dir: 1 | -1) => {
     const el = trackRef.current;
     if (!el) return;
@@ -35,8 +38,6 @@ export default function Work() {
           </h2>
         </div>
 
-        {/* Prev / next controls (hidden on touch-first small screens where
-            drag is natural; the track is still keyboard-scrollable). */}
         <div className="hidden shrink-0 gap-2 sm:flex">
           <button
             type="button"
@@ -57,9 +58,7 @@ export default function Work() {
         </div>
       </div>
 
-      {/* Scroll track — full-bleed, edge to edge. First card sits flush to the
-          left viewport edge; cards bleed off both sides as you scroll. Native
-          scroll-snap works with drag, trackpad, touch, and keyboard. */}
+      {/* Scroll track — full-bleed, edge to edge. */}
       <motion.ul
         ref={trackRef}
         initial={reduce ? false : { opacity: 0 }}
@@ -71,35 +70,71 @@ export default function Work() {
         className="flex w-full snap-x snap-mandatory gap-2 overflow-x-auto scroll-smooth pb-2 scrollbar-none [&::-webkit-scrollbar]:hidden sm:gap-3"
         style={{ scrollPaddingLeft: 0 }}
       >
-        {PROJECTS.map(({ img, alt, title, meta }) => (
-          <li
-            key={title}
-            className="group relative w-[78vw] shrink-0 snap-start overflow-hidden first:snap-center sm:w-[48vw] md:w-[38vw] lg:w-[30vw]"
-          >
-            <div className="relative aspect-4/5 w-full overflow-hidden sm:aspect-3/4 lg:aspect-4/5">
-              <Picture
-                src={img}
-                alt={alt}
-                fill
-                sizes="(min-width: 1024px) 30vw, (min-width: 768px) 38vw, (min-width: 640px) 48vw, 78vw"
-                className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              />
-              {/* Bottom gradient so caption text always clears contrast */}
-              <div
-                aria-hidden="true"
-                className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-ink/80 to-transparent"
-              />
-              {/* Caption */}
-              <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-                <h3 className="font-display text-xl uppercase tracking-[0.06em] text-bone sm:text-2xl">
-                  {title}
-                </h3>
-                <p className="mt-1 font-sans text-sm text-bone/75">{meta}</p>
-              </div>
-            </div>
-          </li>
+        {PROJECTS.map((project) => (
+          <WorkCard key={project.title} project={project} reduce={!!reduce} />
         ))}
       </motion.ul>
     </section>
+  );
+}
+
+type Project = {
+  img: string;
+  alt: string;
+  title: string;
+  meta: string;
+};
+
+function WorkCard({
+  project: { img, alt, title, meta },
+  reduce,
+}: {
+  project: Project;
+  reduce: boolean;
+}) {
+  const ref = useRef<HTMLLIElement>(null);
+
+  // Vertical drift as the whole section passes through the page (not tied to
+  // the horizontal carousel scroll — that stays as-is).
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+
+  return (
+    <li
+      ref={ref}
+      className="group relative w-[78vw] shrink-0 snap-start overflow-hidden first:snap-center sm:w-[48vw] md:w-[38vw] lg:w-[30vw]"
+    >
+      <div className="relative aspect-4/5 w-full overflow-hidden sm:aspect-3/4 lg:aspect-4/5">
+        {/* Parallax image — oversized so it stays full as it drifts */}
+        <motion.div
+          style={reduce ? undefined : { y: imageY }}
+          className="absolute inset-x-0 top-[-10%] h-[120%] will-change-transform max-md:top-0! max-md:h-full! max-md:translate-y-0!"
+        >
+          <Picture
+            src={img}
+            alt={alt}
+            fill
+            sizes="(min-width: 1024px) 30vw, (min-width: 768px) 38vw, (min-width: 640px) 48vw, 78vw"
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+        </motion.div>
+
+        {/* Bottom gradient so caption text always clears contrast */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-ink/80 to-transparent"
+        />
+        {/* Caption */}
+        <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+          <h3 className="font-display text-xl uppercase tracking-[0.06em] text-bone sm:text-2xl">
+            {title}
+          </h3>
+          <p className="mt-1 font-sans text-sm text-bone/75">{meta}</p>
+        </div>
+      </div>
+    </li>
   );
 }

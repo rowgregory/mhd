@@ -6,6 +6,7 @@ import { ProjectsGalleryProps } from "@/types/project.types";
 import { ProjectTile } from "./ProjectTile";
 
 export default function ProjectsGallery({ projects }: ProjectsGalleryProps) {
+  console.log("projects: ", projects);
   const { reveal, makeContainer, reduce, tileVariants } = useMotionPresets();
 
   if (projects.length === 0) {

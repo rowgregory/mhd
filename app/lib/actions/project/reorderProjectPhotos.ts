@@ -9,9 +9,9 @@ export async function reorderProjectPhotos(
   projectId: string,
   orderedIds: string[],
 ): Promise<Result> {
-  if (!(await requireAdmin())) {
-    return { success: false, error: "Not authorized." };
-  }
+  const actor = await requireAdmin();
+  if (!actor) return { success: false, error: "Not authorized." };
+
   try {
     await prisma.$transaction(
       orderedIds.map((id, index) =>

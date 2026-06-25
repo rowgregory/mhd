@@ -9,9 +9,9 @@ export async function setFeaturedPhoto(
   projectId: string,
   photoId: string,
 ): Promise<Result> {
-  if (!(await requireAdmin())) {
-    return { success: false, error: "Not authorized." };
-  }
+  const actor = await requireAdmin();
+  if (!actor) return { success: false, error: "Not authorized." };
+
   try {
     // one featured per project: clear others, set this one
     await prisma.$transaction([

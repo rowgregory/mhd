@@ -15,14 +15,15 @@ export async function createTestimonial(
   input: TestimonialInput,
 ): Promise<Result<TestimonialRecord>> {
   const actor = await requireAdmin();
-  if (!actor) {
-    return { success: false, error: "Not authorized." };
-  }
+  if (!actor) return { success: false, error: "Not authorized." };
+
   const name = input.name?.trim();
   const quote = input.quote?.trim();
+
   if (!name || !quote) {
     return { success: false, error: "Name and quote are required." };
   }
+
   try {
     const row = await prisma.testimonial.create({
       data: {

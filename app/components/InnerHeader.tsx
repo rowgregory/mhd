@@ -4,15 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { NAV } from "../lib/constants/common.constants";
-import { useNavDrawer } from "../lib/stores/useNavDrawer";
+
 import { useMotionPresets } from "../lib/hooks/useMotionPresets";
-import { Menu } from "lucide-react";
 import MhdLogo from "./MHDLogo";
 import ArrowButton from "./ui/ArrowButton";
+import { BurgerButton } from "./ui/BurgerButton";
 
 export default function InnerHeader() {
   const pathname = usePathname();
-  const openDrawer = useNavDrawer((s) => s.openDrawer);
   const { makeContainer, item } = useMotionPresets();
 
   return (
@@ -40,7 +39,7 @@ export default function InnerHeader() {
 
           <motion.ul
             variants={makeContainer(0.07, 0.15)}
-            className="items-center gap-8 lg:flex"
+            className="items-center gap-8 hidden lg:flex"
           >
             {NAV.map((navItem) => {
               const active =
@@ -78,14 +77,7 @@ export default function InnerHeader() {
               Request a quote
             </ArrowButton>
           </div>
-          <button
-            type="button"
-            onClick={openDrawer}
-            aria-label="Open menu"
-            className="inline-flex h-10 w-10 items-center justify-center text-bone transition-colors hover:text-accent focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-accent lg:hidden"
-          >
-            <Menu size={22} strokeWidth={1.5} aria-hidden="true" />
-          </button>
+          <BurgerButton />
         </motion.div>
       </nav>
     </motion.header>
