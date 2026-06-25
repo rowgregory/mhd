@@ -19,3 +19,11 @@ export function getGreeting() {
   if (h < 18) return "Good afternoon";
   return "Good evening";
 }
+
+export function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}

@@ -1,7 +1,6 @@
-import { Result, TestimonialRecord } from "@/types/testimonial.types";
 import prisma from "@/prisma/client";
 
-export async function listTestimonials(): Promise<Result<TestimonialRecord[]>> {
+export async function listTestimonials() {
   try {
     const rows = await prisma.testimonial.findMany({
       orderBy: [{ order: "asc" }, { createdAt: "desc" }],
@@ -11,12 +10,10 @@ export async function listTestimonials(): Promise<Result<TestimonialRecord[]>> {
         title: true,
         company: true,
         quote: true,
-        order: true,
-        isVisible: true,
       },
     });
-    return { success: true, data: rows };
+    return { success: true as const, data: rows };
   } catch {
-    return { success: false, error: "Could not load testimonials." };
+    return { success: false as const, error: "Could not load testimonials." };
   }
 }

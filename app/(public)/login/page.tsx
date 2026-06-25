@@ -1,10 +1,17 @@
 import { Suspense } from "react";
 import LoginClient from "./LoginClient";
+import { getActor } from "@/app/lib/actions/user/getActor";
+import { redirect } from "next/navigation";
 
 // useSearchParams() inside LoginScreen requires a Suspense boundary, or the
-// whole route bails out of static rendering (the error you hit). The fallback
+// whole route bails out of static rendering. The fallback
 // shows while the client reads the URL params on first paint.
-export default function LoginPage() {
+export default async function LoginPage() {
+  const actor = await getActor();
+  if (actor) {
+    redirect("/dashboard");
+  }
+
   return (
     <Suspense fallback={<LoginFallback />}>
       <LoginClient />

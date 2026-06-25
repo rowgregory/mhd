@@ -50,8 +50,8 @@ export default function TestimonialsClient({ initial }: Props) {
       title: t.title ?? "",
       company: t.company ?? "",
       quote: t.quote,
-      order: t.order,
-      isVisible: t.isVisible,
+      order: Number(t.order),
+      isVisible: !!t.isVisible,
     });
     setError(null);
     setOpen(true);

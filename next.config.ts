@@ -17,13 +17,15 @@ import type { NextConfig } from "next";
  * you exactly which directive blocked it — add that origin to the right line.
  */
 
+const isDev = process.env.NODE_ENV === "development";
+
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com;
+  script-src 'self' 'unsafe-inline' ${isDev ? "'unsafe-eval'" : ""} https://va.vercel-scripts.com https://www.googletagmanager.com;
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
   font-src 'self' https://fonts.gstatic.com data:;
-  img-src 'self' data: blob: https://firebasestorage.googleapis.com https://*.googleapis.com;
-  connect-src 'self' https://firebasestorage.googleapis.com https://*.googleapis.com https://vitals.vercel-insights.com;
+  img-src 'self' data: blob: https://firebasestorage.googleapis.com https://*.googleapis.com https://www.google-analytics.com https://www.googletagmanager.com;
+  connect-src 'self' https://firebasestorage.googleapis.com https://*.googleapis.com https://vitals.vercel-insights.com https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com;
   frame-ancestors 'none';
   base-uri 'self';
   form-action 'self';

@@ -146,10 +146,20 @@ export default function DashboardClient({
           ))}
         </ul>
 
-        {/* Recent inquiries */}
-        <h2 className="mt-10 font-sans text-sm font-medium text-admin-fg-muted">
-          Recent inquiries
-        </h2>
+        {/* Recent inquiries — read-only preview; management lives on the inquiries page */}
+        <div className="mt-10 flex items-center justify-between gap-4">
+          <h2 className="font-sans text-sm font-medium text-admin-fg-muted">
+            Recent inquiries
+          </h2>
+          <Link
+            href="/dashboard/inquiries"
+            className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-admin-fg-muted transition-colors hover:text-admin-fg focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-admin-accent"
+          >
+            View all
+            <ArrowRight size={13} strokeWidth={1.75} aria-hidden="true" />
+          </Link>
+        </div>
+
         {recentInquiries.length === 0 ? (
           <p className="mt-3 border border-admin-line bg-admin-surface px-4 py-6 text-center font-sans text-sm text-admin-fg-subtle">
             No inquiries yet.
@@ -157,38 +167,36 @@ export default function DashboardClient({
         ) : (
           <ul className="mt-3 space-y-2">
             {recentInquiries.map((q) => (
-              <li key={q.id}>
-                <Link
-                  href={`/admin/inquiries/${q.id}`}
-                  className="flex items-center justify-between gap-3 border border-admin-line bg-admin-surface px-4 py-3 transition-colors hover:border-admin-fg/30 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-admin-accent"
-                >
-                  <span className="flex min-w-0 items-center gap-3">
-                    <Mail
-                      size={16}
-                      strokeWidth={1.5}
-                      aria-hidden="true"
-                      className="shrink-0 text-admin-fg-subtle"
-                    />
-                    <span className="min-w-0">
-                      <span className="font-sans text-sm font-medium text-admin-fg">
-                        {q.name}
-                      </span>
-                      <span className="ml-2 truncate font-sans text-sm text-admin-fg-subtle">
-                        {q.message}
-                      </span>
+              <li
+                key={q.id}
+                className="flex items-center justify-between gap-3 border border-admin-line bg-admin-surface px-4 py-3"
+              >
+                <span className="flex min-w-0 items-center gap-3">
+                  <Mail
+                    size={16}
+                    strokeWidth={1.5}
+                    aria-hidden="true"
+                    className="shrink-0 text-admin-fg-subtle"
+                  />
+                  <span className="min-w-0">
+                    <span className="font-sans text-sm font-medium text-admin-fg">
+                      {q.name}
+                    </span>
+                    <span className="ml-2 truncate font-sans text-sm text-admin-fg-subtle">
+                      {q.message}
                     </span>
                   </span>
-                  <span className="flex shrink-0 items-center gap-3">
-                    {q.status === "NEW" && (
-                      <span className="bg-admin-accent/15 px-2 py-0.5 font-sans text-[11px] text-admin-accent">
-                        {STATUS_LABEL[q.status]}
-                      </span>
-                    )}
-                    <span className="font-sans text-xs text-admin-fg-subtle">
-                      {timeAgo(q.createdAt)}
+                </span>
+                <span className="flex shrink-0 items-center gap-3">
+                  {q.status === "NEW" && (
+                    <span className="bg-admin-accent/15 px-2 py-0.5 font-sans text-[11px] text-admin-accent">
+                      {STATUS_LABEL[q.status]}
                     </span>
+                  )}
+                  <span className="font-sans text-xs text-admin-fg-subtle">
+                    {timeAgo(q.createdAt)}
                   </span>
-                </Link>
+                </span>
               </li>
             ))}
           </ul>

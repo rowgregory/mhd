@@ -6,8 +6,8 @@ export type TestimonialRecord = {
   title: string | null;
   company: string | null;
   quote: string;
-  order: number;
-  isVisible: boolean;
+  order?: number;
+  isVisible?: boolean;
 };
 
 export type TestimonialInput = {
