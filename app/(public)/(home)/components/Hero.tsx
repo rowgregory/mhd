@@ -98,7 +98,7 @@ export default function Hero() {
         </span>
         <span className="hidden lg:block">
           <ArrowButton
-            href="/projects"
+            href="/portfolio"
             variant="camel"
             ariaLabel="View our work"
             className="hero-rise-item mt-8"
