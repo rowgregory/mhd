@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import ArrowButton from "./ui/ArrowButton";
-import { useMotionPresets } from "../lib/hooks/useMotionPresets";
-import { WoodGrainTexture } from "./textures/WoodGrainTexture";
+import ArrowButton from "../../../components/ui/ArrowButton";
+import { useMotionPresets } from "../../../lib/hooks/useMotionPresets";
+import { WoodGrainTexture } from "../../../components/textures/WoodGrainTexture";
 
 export default function DreamCta({
   title = "Bring your space to life with cabinetry built just for you!",

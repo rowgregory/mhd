@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import Link from "next/link";
 import { Plus, ArrowLeft, ArrowRight, Image as ImageIcon } from "lucide-react";
-import AdminDrawer from "@/app/components/AdminDrawer";
+import AdminDrawer from "@/app/components/drawers/AdminDrawer";
 import { ProjectRecord } from "@/types/project.types";
 import { createProject } from "@/app/lib/actions/project/createProject";
 import Picture from "@/app/components/ui/Picture";

@@ -9,7 +9,7 @@ import {
   useTransform,
   useReducedMotion,
 } from "framer-motion";
-import { WoodGrainTexture } from "../textures/WoodGrainTexture";
+import { WoodGrainTexture } from "../../../components/textures/WoodGrainTexture";
 
 export default function About() {
   const { container, rise } = useMotionPresets();

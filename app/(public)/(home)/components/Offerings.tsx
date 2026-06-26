@@ -10,10 +10,10 @@ import {
   type Variants,
 } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import Picture from "../ui/Picture";
+import Picture from "../../../components/ui/Picture";
 import { useMotionPresets } from "@/app/lib/hooks/useMotionPresets";
 import { OFFERINGS } from "@/app/lib/constants/home.constants";
-import ArrowButton from "../ui/ArrowButton";
+import ArrowButton from "../../../components/ui/ArrowButton";
 
 export default function Offerings() {
   const { container, rise } = useMotionPresets();

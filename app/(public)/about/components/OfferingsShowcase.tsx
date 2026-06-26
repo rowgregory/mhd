@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Picture from "../ui/Picture";
+import Picture from "../../../components/ui/Picture";
 import { useMotionPresets } from "@/app/lib/hooks/useMotionPresets";
 import { OFFERINGS } from "@/app/lib/constants/home.constants";
 

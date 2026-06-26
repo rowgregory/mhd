@@ -1,12 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { NAV, PHONE, PHONE_HREF } from "../lib/constants/common.constants";
+import {
+  NAV,
+  PHONE,
+  PHONE_HREF,
+} from "../../../lib/constants/common.constants";
 import { motion } from "framer-motion";
-import MhdLogo from "./MHDLogo";
-import ArrowButton from "./ui/ArrowButton";
-import { useMotionPresets } from "../lib/hooks/useMotionPresets";
-import { BurgerButton } from "./ui/BurgerButton";
+import MhdLogo from "../../../components/MHDLogo";
+import ArrowButton from "../../../components/ui/ArrowButton";
+import { useMotionPresets } from "../../../lib/hooks/useMotionPresets";
+import { BurgerButton } from "../../../components/ui/BurgerButton";
 
 export default function Header() {
   const { item, makeContainer } = useMotionPresets();

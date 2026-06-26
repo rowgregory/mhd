@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { PortfolioProject } from "@/types/project.types";
 import { useMotionPresets } from "@/app/lib/hooks/useMotionPresets";
-import Picture from "../ui/Picture";
+import Picture from "../../../components/ui/Picture";
 
 export default function RecentProjects({
   projects,

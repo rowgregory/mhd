@@ -3,47 +3,14 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Quote, ArrowLeft, ArrowRight } from "lucide-react";
+import { TestimonialRecord } from "@/types/testimonial.types";
+import { FALLBACK } from "@/app/lib/constants/testimonial.constants";
 
-export type Testimonial = {
-  id: string;
-  quote: string;
-  name: string;
-  title?: string | null; // e.g. "Homeowner" or job role
-  company?: string | null; // e.g. town, or business name
-};
-
-const FALLBACK: Testimonial[] = [
-  {
-    id: "1",
-    quote:
-      "They built our kitchen exactly the way we pictured it — and caught details we hadn't even thought of. The craftsmanship speaks for itself.",
-    name: "Dee C.",
-    title: "Homeowner",
-    company: "Marblehead, MA",
-  },
-  {
-    id: "2",
-    quote:
-      "Hands-on, respectful, and genuinely skilled. Every piece fits like it grew there. We couldn't be happier with the result.",
-    name: "David F.",
-    title: "Homeowner",
-    company: "Swampscott, MA",
-  },
-  {
-    id: "3",
-    quote:
-      "From the first sketch to the final install, the whole process felt easy. The finished built-ins are the best part of our home.",
-    name: "The Jacobs Family",
-    title: null,
-    company: "Beverly, MA",
-  },
-];
-
-export default function TestimonialsBlock({
+export default function Testimonials({
   testimonials = FALLBACK,
   autoplay = true,
 }: {
-  testimonials?: Testimonial[];
+  testimonials?: TestimonialRecord[];
   autoplay?: boolean;
 }) {
   const reduce = useReducedMotion();
@@ -99,7 +66,7 @@ export default function TestimonialsBlock({
     >
       <div className="mx-auto max-w-3xl text-center">
         {/* Eyebrow */}
-        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
+        <p className="font-mono text-[10px] uppercase tracking-label text-accent">
           Kind words
         </p>
         <h2
@@ -118,7 +85,7 @@ export default function TestimonialsBlock({
         />
 
         {/* Rotating quote */}
-        <div className="relative mt-6 min-h-[180px] sm:min-h-[160px]">
+        <div className="relative mt-6 min-h-45 sm:min-h-40">
           <AnimatePresence mode="wait" custom={dir}>
             <motion.figure
               key={active.id}

@@ -1,12 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useMotionPresets } from "../lib/hooks/useMotionPresets";
+import { useMotionPresets } from "../../../lib/hooks/useMotionPresets";
 import { ProjectsGalleryProps } from "@/types/project.types";
 import { ProjectTile } from "./ProjectTile";
 
 export default function ProjectsGallery({ projects }: ProjectsGalleryProps) {
-  console.log("projects: ", projects);
   const { reveal, makeContainer, reduce, tileVariants } = useMotionPresets();
 
   if (projects.length === 0) {

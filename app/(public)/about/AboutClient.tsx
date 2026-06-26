@@ -1,11 +1,11 @@
-import AboutFooterBanner from "@/app/components/AboutFooterBanner";
-import Feature from "@/app/components/blocks/FeatureBlock";
-import OfferingsShowcase from "@/app/components/blocks/OfferingsShowcase";
-import RecentProjects from "@/app/components/blocks/RecentProjects";
-import DreamCta from "@/app/components/DreamCta";
+import AboutFooterBanner from "@/app/(public)/about/components/AboutFooterBanner";
+import OfferingsShowcase from "@/app/(public)/about/components/OfferingsShowcase";
+import RecentProjects from "@/app/(public)/about/components/RecentProjects";
+import DreamCta from "@/app/(public)/about/components/DreamCta";
 import PageHero from "@/app/components/PageHero";
-import StatsCounter from "@/app/components/StatsCounter";
+import StatsCounter from "@/app/(public)/about/components/StatsCounter";
 import { PortfolioProject } from "@/types/project.types";
+import Feature from "../(home)/components/Feature";
 
 export function AboutClient({
   projects,

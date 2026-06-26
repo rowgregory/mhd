@@ -2,7 +2,7 @@
 
 import { useCallback, useRef } from "react";
 import { motion, type Variants } from "framer-motion";
-import Picture from "./ui/Picture";
+import Picture from "../../../../components/ui/Picture";
 import { GridPhoto } from "@/types/project.types";
 
 export function PhotoCell({

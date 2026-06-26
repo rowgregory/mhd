@@ -1,15 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ProjectDetailClient } from "./ProjectDetailClient";
-import { getAllProjectIds } from "@/app/lib/actions/project/getAppProjectIds";
 import { getPublicProject } from "@/app/lib/actions/project/getPublicProject";
-
-// Pre-render a static page per project at build time (revalidated on demand
-// via the admin revalidatePath calls). Comment out if you prefer pure SSR.
-export async function generateStaticParams() {
-  const ids = await getAllProjectIds();
-  return ids.map((id) => ({ id }));
-}
 
 export async function generateMetadata({
   params,
@@ -36,9 +28,8 @@ export default async function ProjectDetailPage({
 }: {
   params: Promise<{ title: string }>;
 }) {
-  const { title } = await params;
-  const cleanTitle = title.replace(/%20/g, " ");
-  const project = await getPublicProject(cleanTitle);
+  const title = decodeURIComponent((await params).title);
+  const project = await getPublicProject(title);
 
   if (!project) notFound();
 

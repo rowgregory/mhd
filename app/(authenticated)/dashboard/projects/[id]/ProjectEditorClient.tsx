@@ -38,6 +38,7 @@ export default function ProjectEditorClient({
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
   const fileInput = useRef<HTMLInputElement>(null);
+  const [pendingRemove, setPendingRemove] = useState<string | null>(null);
 
   const saveDetails = () => {
     setError(null);
@@ -141,9 +142,9 @@ export default function ProjectEditorClient({
   };
 
   const remove = (photoId: string) => {
-    if (!confirm("Remove this photo?")) return;
     const prev = photos;
     setPhotos((p) => p.filter((ph) => ph.id !== photoId));
+    setPendingRemove(null);
     startTransition(async () => {
       const res = await deleteProjectPhoto(photoId);
       if (!res.success) setPhotos(prev);
@@ -312,7 +313,13 @@ export default function ProjectEditorClient({
                 )}
 
                 {/* hover actions */}
-                <span className="absolute inset-x-0 bottom-0 flex items-center justify-end gap-1 bg-black/45 px-2 py-1.5 opacity-0 transition-opacity group-hover:opacity-100">
+                <span
+                  className={`absolute inset-x-0 bottom-0 flex items-center justify-end gap-1 bg-black/45 px-2 py-1.5 transition-opacity ${
+                    pendingRemove === p.id
+                      ? "opacity-100"
+                      : "opacity-0 group-hover:opacity-100"
+                  }`}
+                >
                   <button
                     type="button"
                     onClick={() => feature(p.id)}
@@ -322,15 +329,34 @@ export default function ProjectEditorClient({
                   >
                     <Star size={15} strokeWidth={1.5} aria-hidden="true" />
                   </button>
-                  <button
-                    type="button"
-                    onClick={() => remove(p.id)}
-                    disabled={pending}
-                    aria-label="Remove photo"
-                    className="inline-flex h-7 w-7 items-center justify-center text-white transition-colors hover:text-danger focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-white"
-                  >
-                    <Trash2 size={15} strokeWidth={1.5} aria-hidden="true" />
-                  </button>
+                  {pendingRemove === p.id ? (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => remove(p.id)}
+                        className="font-sans text-[11px] text-white hover:text-danger px-1"
+                      >
+                        Delete
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setPendingRemove(null)}
+                        className="font-sans text-[11px] text-white/60 hover:text-white px-1"
+                      >
+                        Cancel
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => setPendingRemove(p.id)}
+                      disabled={pending}
+                      aria-label="Remove photo"
+                      className="inline-flex h-7 w-7 items-center justify-center text-white transition-colors hover:text-danger focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-white disabled:opacity-40"
+                    >
+                      <Trash2 size={15} strokeWidth={1.5} aria-hidden="true" />
+                    </button>
+                  )}
                 </span>
               </li>
             ))}

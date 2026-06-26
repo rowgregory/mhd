@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Bebas_Neue, Geist_Mono, Roboto } from "next/font/google";
 import "./globals.css";
-import NavDrawer from "./components/NavDrawer";
+import NavDrawer from "./components/drawers/NavDrawer";
 import JsonLd from "./Jsonld";
 import StickyHeader from "./components/StickyHeader";
 import ConditionalFooter from "./components/ConditionalFooter";

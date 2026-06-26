@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, Plus, ShieldCheck, Shield, UserMinus } from "lucide-react";
 import { UserRecord } from "@/types/user.types";
 import { grantAdmin, revokeAdmin } from "@/app/lib/actions/user";
-import AdminDrawer from "@/app/components/AdminDrawer";
+import AdminDrawer from "@/app/components/drawers/AdminDrawer";
 import ConfirmModal from "@/app/components/modals/ConfirmModal";
 
 type Role = "ADMIN" | "SUPER_USER";

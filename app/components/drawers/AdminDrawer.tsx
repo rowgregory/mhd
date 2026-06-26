@@ -3,9 +3,9 @@
 import { useRef } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { X } from "lucide-react";
-import { useLockBodyScroll } from "../lib/hooks/useLockBodyScoll";
-import { useDrawerKeyboard } from "../lib/hooks/useDrawerKeyboard";
-import { useFocusReturn } from "../lib/hooks/useFocusReturn";
+import { useLockBodyScroll } from "../../lib/hooks/useLockBodyScoll";
+import { useDrawerKeyboard } from "../../lib/hooks/useDrawerKeyboard";
+import { useFocusReturn } from "../../lib/hooks/useFocusReturn";
 import { AdminDrawerProps } from "@/types/admin.types";
 
 export default function AdminDrawer({

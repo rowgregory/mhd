@@ -7,8 +7,8 @@ import {
   useTransform,
   useReducedMotion,
 } from "framer-motion";
-import Picture from "./ui/Picture";
-import ArrowButton from "./ui/ArrowButton";
+import Picture from "../../../components/ui/Picture";
+import ArrowButton from "../../../components/ui/ArrowButton";
 
 export default function Hero() {
   const reduce = useReducedMotion();

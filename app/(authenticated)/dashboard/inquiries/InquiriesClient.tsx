@@ -9,7 +9,7 @@ import { updateInquiryStatus } from "@/app/lib/actions/inquiry/updateInquiryStat
 import { STATUSES } from "@/app/lib/constants/inquiry.constants";
 import { formatDate } from "@/app/lib/utils/date.utils";
 import Link from "next/link";
-import { InquiryDrawer } from "@/app/components/InquiryDrawer";
+import { InquiryDrawer } from "@/app/components/drawers/InquiryDrawer";
 import { StatusBadge } from "@/app/components/ui/StatusBadge";
 
 export default function InquiriesClient({

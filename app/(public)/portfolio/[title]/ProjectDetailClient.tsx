@@ -6,7 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import Picture from "@/app/components/ui/Picture";
 import { useMotionPresets } from "@/app/lib/hooks/useMotionPresets";
 import type { ProjectRecord } from "@/types/project.types";
-import PhotoGrid from "@/app/components/PhotoGrid";
+import PhotoGrid from "@/app/(public)/portfolio/[title]/components/PhotoGrid";
 
 export function ProjectDetailClient({
   project,

@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { GridPhoto } from "@/types/project.types";
-import { useEscapeToClose } from "../lib/hooks/useEscapeToClose";
+import { useEscapeToClose } from "../../../../lib/hooks/useEscapeToClose";
 
 export function Lightbox({
   photo,

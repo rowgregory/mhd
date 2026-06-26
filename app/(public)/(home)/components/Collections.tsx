@@ -10,9 +10,9 @@ import {
   type Variants,
 } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import Picture from "../ui/Picture";
+import Picture from "../../../components/ui/Picture";
 import { useMotionPresets } from "@/app/lib/hooks/useMotionPresets";
-import ArrowButton from "../ui/ArrowButton";
+import ArrowButton from "../../../components/ui/ArrowButton";
 import { PROJECT_TYPES } from "@/app/lib/constants/home.constants";
 
 export default function Collections() {

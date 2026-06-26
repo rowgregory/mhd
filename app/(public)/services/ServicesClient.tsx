@@ -1,8 +1,8 @@
 import PageHero from "@/app/components/PageHero";
-import ServicesFeatures from "@/app/components/ServicesFeatures";
-import WhatWeDo from "./WhatWeDo";
-import VideoBanner from "./VideoBanner";
-import Materials from "./Materials";
+import ServicesFeatures from "@/app/(public)/services/components/ServicesFeatures";
+import WhatWeDo from "./components/WhatWeDo";
+import VideoBanner from "./components/VideoBanner";
+import Materials from "./components/Materials";
 
 export function ServicesClient() {
   return (

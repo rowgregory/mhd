@@ -1,8 +1,8 @@
 import { Inquiry } from "@/types/inquiry.types";
 import { InquiryStatus } from "@prisma/client";
-import { formatDate } from "../lib/utils/date.utils";
+import { formatDate } from "../../lib/utils/date.utils";
 import { Building2, Mail, Phone, X } from "lucide-react";
-import { STATUSES } from "../lib/constants/inquiry.constants";
+import { STATUSES } from "../../lib/constants/inquiry.constants";
 
 export function InquiryDrawer({
   inquiry,

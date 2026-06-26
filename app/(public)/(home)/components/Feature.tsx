@@ -7,10 +7,10 @@ import {
   useTransform,
   useReducedMotion,
 } from "framer-motion";
-import Picture from "../ui/Picture";
+import Picture from "../../../components/ui/Picture";
 import { useMotionPresets } from "@/app/lib/hooks/useMotionPresets";
 import { ITEMS } from "@/app/lib/constants/home.constants";
-import ArrowButton from "../ui/ArrowButton";
+import ArrowButton from "../../../components/ui/ArrowButton";
 
 export default function Feature() {
   const { container, fromLeft, rise } = useMotionPresets();

@@ -3,7 +3,7 @@
 import { useCallback, useRef } from "react";
 import { motion, type Variants } from "framer-motion";
 import Link from "next/link";
-import Picture from "./ui/Picture";
+import Picture from "../../../components/ui/Picture";
 import type { PortfolioProject } from "@/types/project.types";
 
 export function ProjectTile({

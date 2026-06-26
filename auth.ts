@@ -17,8 +17,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   session: { strategy: "database" },
   callbacks: {
     // Only allow sign-in if a user row exists AND their role is SUPER_USER.
-    async signIn() {
-      return true; // anyone authenticates; authorization happens at /dashboard + /login
+    async signIn({ user }) {
+      const existing = await prisma.user.findUnique({
+        where: { email: user.email! },
+      });
+      return !!existing;
     },
     async session({ session, user }) {
       session.user.id = user.id;
@@ -26,5 +29,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return session;
     },
   },
-  pages: { signIn: "/login" },
+  pages: {
+    signIn: "/login",
+    error: "/login",
+  },
 });

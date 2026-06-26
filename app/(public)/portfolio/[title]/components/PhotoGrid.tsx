@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { useMotionPresets } from "../lib/hooks/useMotionPresets";
+import { useMotionPresets } from "../../../../lib/hooks/useMotionPresets";
 import { GridPhoto, PhotoGridProps } from "@/types/project.types";
 import { PhotoCell } from "./PhotoCell";
 import { Lightbox } from "./LightBox";

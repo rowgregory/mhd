@@ -15,7 +15,7 @@ import { updateTestimonial } from "@/app/lib/actions/testimonial/updateTestimoni
 import { createTestimonial } from "@/app/lib/actions/testimonial/createTestimonial";
 import { toggleTestimonialVisibility } from "@/app/lib/actions/testimonial/toggleTestimonialVisibility";
 import { deleteTestimonial } from "@/app/lib/actions/testimonial/deleteTestimonial";
-import AdminDrawer from "@/app/components/AdminDrawer";
+import AdminDrawer from "@/app/components/drawers/AdminDrawer";
 import { TestimonialForm } from "@/app/components/forms/TestimonialForm";
 import Link from "next/link";
 

@@ -7,7 +7,7 @@ import {
   DeliveryIcon,
   PrecisionIcon,
   QualityIcon,
-} from "./ui/ServiceIcons";
+} from "../../../components/ui/ServiceIcons";
 import { useMotionPresets } from "@/app/lib/hooks/useMotionPresets";
 
 type Service = {
